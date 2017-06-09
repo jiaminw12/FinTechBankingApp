@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
+    android:id="@+id/register_form"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -43,12 +44,13 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp">
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/input_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:maxLines="1"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -81,6 +83,13 @@
                 android:inputType="textPassword"/>
         </android.support.design.widget.TextInputLayout>
 
+        <CheckBox
+            android:id="@+id/input_terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="I agree to the Terms and Conditions."/>
+
         <!-- SignupActivity Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_signup"
@@ -92,15 +101,17 @@
             android:text="@string/title_activity_register"
             android:textColor="@color/white"/>
 
-        <TextView
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/link_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="@string/prompt_back_to_login"
+            android:background="@null"
             android:textColor="@color/white"
             android:textSize="16dip"/>
 
     </LinearLayout>
+
 </ScrollView>

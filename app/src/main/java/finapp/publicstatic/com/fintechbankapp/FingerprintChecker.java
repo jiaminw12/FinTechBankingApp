@@ -1,74 +1,72 @@
 package finapp.publicstatic.com.fintechbankapp;
 
+import android.Manifest;
 import android.annotation.TargetApi;
-import android.content.Context;
+import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
-import android.Manifest;
 import android.os.Build;
-import android.os.CancellationSignal;
+import android.support.annotation.BoolRes;
 import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
+
+import static android.content.Context.FINGERPRINT_SERVICE;
+import static android.content.Context.KEYGUARD_SERVICE;
 
 @TargetApi(Build.VERSION_CODES.M)
-public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
+public class FingerprintChecker {
 
-    // You should use the CancellationSignal method whenever your app can no longer process user input, for example when your app goes
-    // into the background. If you don’t use this method, then other apps will be unable to access the touch sensor, including the lockscreen!//
+    private Boolean result;
 
-    private CancellationSignal cancellationSignal;
-    private Context context;
-
-    public FingerprintHandler(Context mContext) {
-        context = mContext;
+    public FingerprintChecker(Activity activity){
+        result = false;
+        checkVersion(activity);
     }
 
-    //Implement the startAuth method, which is responsible for starting the fingerprint authentication process//
+    private Boolean getResult(){
+        return result;
+    }
 
-    public void startAuth(FingerprintManager manager, FingerprintManager.CryptoObject cryptoObject) {
+    private void checkVersion(Activity activity){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            KeyguardManager keyguardManager = (KeyguardManager) activity.getSystemService(KEYGUARD_SERVICE);
+            FingerprintManager fingerprintManager = (FingerprintManager) activity.getSystemService(FINGERPRINT_SERVICE);
+            try {
+                if (!fingerprintManager.isHardwareDetected()) {
+                    // Device doesn't support fingerprint authentication
 
-        cancellationSignal = new CancellationSignal();
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-            return;
+                    // show password ....
+                    // If a fingerprint sensor isn’t available, then inform the user that they’ll be unable to use your app’s fingerprint functionality//
+                    result = false;
+                }
+
+                //Check whether the user has granted your app the USE_FINGERPRINT permission//
+                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
+                    // If your app doesn't have this permission, then display the following text//
+                    //textView.setText("Please enable the fingerprint " +
+                    //        "permission");
+                    result = false;
+                }
+
+
+                if (!fingerprintManager.hasEnrolledFingerprints()) {
+                    // User hasn't enrolled any fingerprints to authenticate with
+                    result = false;
+                }
+
+                //Check that the lockscreen is secured//
+                if (!keyguardManager.isKeyguardSecure()) {
+                    // If the user hasn’t secured their lockscreen with a PIN password or pattern, then display the following text//
+                    //textView.setText("Please enable lockscreen security in your device's Settings");
+                    result = false;
+                } else {
+                    result = true;
+                }
+
+            } catch (SecurityException e){
+
+            }
         }
-        manager.authenticate(cryptoObject, cancellationSignal, 0, this, null);
     }
-
-    @Override
-    //onAuthenticationError is called when a fatal error has occurred. It provides the error code and error message as its parameters//
-
-    public void onAuthenticationError(int errMsgId, CharSequence errString) {
-
-        //I’m going to display the results of fingerprint authentication as a series of toasts.
-        //Here, I’m creating the message that’ll be displayed if an error occurs//
-
-        Toast.makeText(context, "Authentication error\n" + errString, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-
-    //onAuthenticationFailed is called when the fingerprint doesn’t match with any of the fingerprints registered on the device//
-
-    public void onAuthenticationFailed() {
-        Toast.makeText(context, "Authentication failed", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-
-    //onAuthenticationHelp is called when a non-fatal error has occurred. This method provides additional information about the error,
-    //so to provide the user with as much feedback as possible I’m incorporating this information into my toast//
-    public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-        Toast.makeText(context, "Authentication help\n" + helpString, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-
-    //onAuthenticationSucceeded is called when a fingerprint has been successfully matched to one of the fingerprints stored on the user’s device//
-    public void onAuthenticationSucceeded(
-            FingerprintManager.AuthenticationResult result) {
-
-        Toast.makeText(context, "Success!", Toast.LENGTH_LONG).show();
-    }
-
 
 }
