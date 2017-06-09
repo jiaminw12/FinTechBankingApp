@@ -9,7 +9,7 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context="finapp.publicstatic.com.fintech.LoginActivity">
+              tools:context="finapp.publicstatic.com.fintechbankapp.LoginActivity">
 
     <!-- Login progress -->
     <ScrollView
@@ -41,8 +41,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true"/>
+                    android:maxLines="1"/>
 
             </android.support.design.widget.TextInputLayout>
 
@@ -64,12 +63,13 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="16dp"
                 android:text="@string/prompt_forget_pwd"
+                android:background="@null"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
 
@@ -84,13 +84,14 @@
                 android:layout_marginBottom="24dp"
                 android:textStyle="bold"/>
 
-            <TextView
+            <Button
                 android:id="@+id/link_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:text="@string/sign_up_reminder"
+                android:background="@null"
                 android:textColor="@color/white"
                 android:textSize="16dip"/>
 
