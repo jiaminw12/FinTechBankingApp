@@ -23,7 +23,7 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyView
     private List<Accounts> accountList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        //public TextView title, year, genre;
+
         public TextView accountID, bankID, accountNum, typeID, amount;
 
         public MyViewHolder(View view) {
@@ -52,10 +52,10 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyView
 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Accounts account = accountList.get(position);
-        holder.accountID.setText(String.valueOf(account.getAccountID()));
-        holder.bankID.setText(account.getBankID());
+        holder.accountID.setText(String.valueOf(account.getAccountId()));
+        holder.bankID.setText(account.getBankname());
         holder.accountNum.setText(account.getAccountNum());
-        holder.typeID.setText(account.getTypeID());
+        holder.typeID.setText(account.getType_name());
         holder.amount.setText(String.valueOf(account.getAmount()));
     }
 
@@ -63,4 +63,3 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyView
         return accountList.size();
     }
 }
-

@@ -337,7 +337,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         "POST", webServiceAddress.getBaseUrl("login"), params);
 
                 if (json != null) {
-                    Log.d("JSON result", json.toString());
+                    //Log.d("JSON result", json.toString());
                     return json;
                 }
 
@@ -363,9 +363,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Toast.makeText(LoginActivity.this, json.getString(TAG_MESSAGE),
                             Toast.LENGTH_LONG).show();
                     if(success == 1){
-                        Intent i = new Intent(getApplicationContext(),
+                        Intent intent = new Intent(getApplicationContext(),
                                 MainActivity.class);
-                        startActivity(i);
+                        intent.putExtra("userId", json.getString("userId"));
+                        startActivity(intent);
                     } else {
                         mPasswordView.setError(getString(R.string.error_incorrect_password));
                         mPasswordView.requestFocus();

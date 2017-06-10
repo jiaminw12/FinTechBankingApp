@@ -10,38 +10,37 @@ public class Accounts {
     Type ID: 0 - Credit Card, 1- Debit Card, 2 - Savings Account, 3 - Current Account, 4 - POSB Everyday Card, 5 - OCBC 365 Card
     Amount: Get from JSON
      */
-    private String title, genre, year;
-    private int accountID, bankID, typeID, amount;
+    //private String[] listOfBanks = new String[] {"DBS", "Maybank", "OCBC", "Standard Chartered", "HSBC", "UOB"};
+    //private String[] listOfTypes = new String[]{"Credit Card", "Debit Card", "Savings Account", "Current Account", "POSB Everyday Card", "OCBC 365 Card"};
+
+    private int accountId;
     private String accountNum;
-    private String[] listOfBanks = new String[] {"DBS", "Maybank", "OCBC", "Standard Chartered", "HSBC", "UOB"};
-    private String[] listOfTypes = new String[] {"Credit Card", "Debit Card", "Savings Account", "Current Account", "POSB Everyday Card", "OCBC 365 Card"};
+    private double amount;
+    private String bankname;
+    private String type_name;
+    private int bankId;
+    private int typeId;
 
     // Constructors
     public Accounts() {
     }
 
-    public Accounts(int accountID, int bankID, String accountNum, int typeID, int amount) {
-        this.accountID = accountID;
-        this.bankID = bankID;
+    public Accounts(int accountId, String accountNum, double amount, String bankname, String type_name, int bankId, int typeId) {
+        this.accountId = accountId;
         this.accountNum = accountNum;
-        this.typeID = typeID;
         this.amount = amount;
+        this.bankname = bankname;
+        this.type_name = type_name;
+        this.bankId = bankId;
+        this.typeId = typeId;
     }
 
-    public int getAccountID() {
-        return accountID;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
-    }
-
-    public String getBankID() {
-        return listOfBanks[bankID];
-    }
-
-    public void setBankID(int bankID) {
-        this.bankID = bankID;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public String getAccountNum() {
@@ -52,19 +51,44 @@ public class Accounts {
         this.accountNum = accountNum;
     }
 
-    public String getTypeID() {
-        return listOfTypes[typeID];
-    }
-
-    public void setTypeID(int typeID) {
-        this.typeID = typeID;
-    }
-
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public String getBankname() {
+        return bankname;
+    }
+
+    public void setBankname(String bankname) {
+        this.bankname = bankname;
+    }
+
+    public String getType_name() {
+        return type_name;
+    }
+
+    public void setType_name(String type_name) {
+        this.type_name = type_name;
+    }
+
+    public int getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(int bankId) {
+        this.bankId = bankId;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
 }

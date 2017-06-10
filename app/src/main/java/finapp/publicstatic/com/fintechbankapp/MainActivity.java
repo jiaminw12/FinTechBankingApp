@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import layout.AccountsFragment;
@@ -19,10 +18,15 @@ import layout.WalletFragment;
 public class MainActivity extends AppCompatActivity implements AccountsFragment.OnFragmentInteractionListener, BillsFragment.OnFragmentInteractionListener, TransactionFragment.OnFragmentInteractionListener, PlannerFragment.OnFragmentInteractionListener, WalletFragment.OnFragmentInteractionListener
 {
 
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle bundle = getIntent().getExtras();
+        userId = bundle.getString("userId");
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
@@ -32,24 +36,26 @@ public class MainActivity extends AppCompatActivity implements AccountsFragment.
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
+
                         switch (item.getItemId()) {
                             case R.id.action_transac:
                                 selectedFragment = TransactionFragment
-                                        .newInstance();
+                                        .newInstance(userId);
                                 break;
                             case R.id.action_bill:
-                                selectedFragment = BillsFragment.newInstance();
+                                selectedFragment = BillsFragment.newInstance(userId);
                                 break;
                             case R.id.action_account:
-                                selectedFragment = AccountsFragment.newInstance();
+                                selectedFragment = AccountsFragment
+                                        .newInstance(userId);
                                 break;
                             case R.id.action_wallet:
                                 selectedFragment = WalletFragment
-                                        .newInstance();
+                                        .newInstance(userId);
                                 break;
                             case R.id.action_budget_planner:
                                 selectedFragment = PlannerFragment
-                                        .newInstance();
+                                        .newInstance(userId);
                                 break;
                         }
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -61,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements AccountsFragment.
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, AccountsFragment.newInstance());
+        transaction.replace(R.id.frame_layout, AccountsFragment.newInstance
+                (userId));
         transaction.commit();
 
         //Used to select an item programmatically
