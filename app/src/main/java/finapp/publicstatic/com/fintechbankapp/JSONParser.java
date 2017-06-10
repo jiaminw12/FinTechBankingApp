@@ -31,6 +31,7 @@ public class JSONParser {
 
     public JSONObject makeHttpRequest( String method, String url,
                                       HashMap<String, String> params) {
+
         sbParams = new StringBuilder();
         int i = 0;
         for (String key : params.keySet()) {
@@ -61,7 +62,6 @@ public class JSONParser {
                 conn.connect();
 
                 paramsString = sbParams.toString();
-
                 wr = new DataOutputStream(conn.getOutputStream());
                 wr.writeBytes(paramsString);
                 wr.flush();
@@ -114,7 +114,7 @@ public class JSONParser {
         try {
             jObj = new JSONObject(result.toString());
         } catch (JSONException e) {
-            Log.e("JSON Parser", "Error parsing data " + e.toString());
+            //Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
 
         // return JSON Object

@@ -4,14 +4,14 @@ public class Users {
 
     private String name;
     private String email;
-    private String password;
+    private String password_hash;
     private String api_key;
     private String status;
 
-    public Users(String name, String email, String password, String api_key) {
+    public Users(String name, String email, String password_hash, String api_key) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password_hash = password_hash;
         this.api_key = api_key;
     }
 
@@ -24,7 +24,7 @@ public class Users {
     }
 
     public String getPassword() {
-        return password;
+        return password_hash;
     }
 
     public String getApi_key() {
@@ -44,7 +44,7 @@ public class Users {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password_hash = password;
     }
 
     public void setApi_key(String api_key) {
