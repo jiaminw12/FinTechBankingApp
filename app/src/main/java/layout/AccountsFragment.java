@@ -10,22 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.io.InputStream;
 
 import Adapter.AccountsAdapter;
 import Model.Accounts;
 import finapp.publicstatic.com.fintechbankapp.R;
 
 public class AccountsFragment extends Fragment {
-    private List<Accounts> movieList = new ArrayList<>();
+    private List<Accounts> accountList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private AccountsAdapter mAdapter;
-
+    private AccountsAdapter accountsAdapter;
     private AccountsFragment.OnFragmentInteractionListener mListener;
 
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     public static AccountsFragment newInstance() {
         AccountsFragment fragment = new AccountsFragment();
@@ -49,70 +54,53 @@ public class AccountsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_accounts, container, false);
+        View view = inflater.inflate(R.layout.fragment_accounts, container, false);
 
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
-        mAdapter = new AccountsAdapter(movieList);
+        accountsAdapter = new AccountsAdapter(accountList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        prepareMovieData();
-        recyclerView.setAdapter(mAdapter);
+        prepareAccountList();
+        recyclerView.setAdapter(accountsAdapter);
 
-        return v;
+        return view;
     }
 
-    private void prepareMovieData() {
-        Accounts movie = new Accounts("Mad Max: Fury Road", "Action & Adventure", "2015");
-        movieList.add(movie);
+    private void prepareAccountList() {
+        String jsonString = null;
 
-        movie = new Accounts("Inside Out", "Animation, Kids & Family", "2015");
-        movieList.add(movie);
+        try {
+            InputStream inputStream = getActivity().getAssets().open("accountsSample.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            jsonString = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
-        movie = new Accounts("Star Wars: Episode VII - The Force Awakens", "Action", "2015");
-        movieList.add(movie);
+        try {
+            JSONObject jsonObj = new JSONObject(jsonString);
+            JSONArray jsonArray = jsonObj.getJSONArray("accounts");
 
-        movie = new Accounts("Shaun the Sheep", "Animation", "2015");
-        movieList.add(movie);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                Accounts account = new Accounts();
+                account.setAccountID(obj.getInt("accountID"));
+                account.setAccountNum(obj.getString("accountNum"));
+                account.setAmount(obj.getInt("amount"));
+                account.setBankID(obj.getInt("bankID"));
+                account.setTypeID(obj.getInt("typeID"));
 
-        movie = new Accounts("The Martian", "Science Fiction & Fantasy", "2015");
-        movieList.add(movie);
-
-        movie = new Accounts("Mission: Impossible Rogue Nation", "Action", "2015");
-        movieList.add(movie);
-
-        movie = new Accounts("Up", "Animation", "2009");
-        movieList.add(movie);
-
-        movie = new Accounts("Star Trek", "Science Fiction", "2009");
-        movieList.add(movie);
-
-        movie = new Accounts("The LEGO Movie", "Animation", "2014");
-        movieList.add(movie);
-
-        movie = new Accounts("Iron Man", "Action & Adventure", "2008");
-        movieList.add(movie);
-
-        movie = new Accounts("Aliens", "Science Fiction", "1986");
-        movieList.add(movie);
-
-        movie = new Accounts("Chicken Run", "Animation", "2000");
-        movieList.add(movie);
-
-        movie = new Accounts("Back to the Future", "Science Fiction", "1985");
-        movieList.add(movie);
-
-        movie = new Accounts("Raiders of the Lost Ark", "Action & Adventure", "1981");
-        movieList.add(movie);
-
-        movie = new Accounts("Goldfinger", "Action & Adventure", "1965");
-        movieList.add(movie);
-
-        movie = new Accounts("Guardians of the Galaxy", "Science Fiction & Fantasy", "2014");
-        movieList.add(movie);
-
-        //mAdapter.notifyDataSetChanged();
+                //Add your values in your `ArrayList` as below:
+                accountList.add(account);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
