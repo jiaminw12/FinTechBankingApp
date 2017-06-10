@@ -1,5 +1,6 @@
 package finapp.publicstatic.com.fintechbankapp;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +16,8 @@ import layout.TransactionFragment;
 import layout.PlannerFragment;
 import layout.WalletFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AccountsFragment.OnFragmentInteractionListener, BillsFragment.OnFragmentInteractionListener, TransactionFragment.OnFragmentInteractionListener, PlannerFragment.OnFragmentInteractionListener, WalletFragment.OnFragmentInteractionListener
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
+    }
+
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
     }
 }
