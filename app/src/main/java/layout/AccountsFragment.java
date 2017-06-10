@@ -1,4 +1,5 @@
 package layout;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
@@ -9,19 +10,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.InputStream;
-
 import Adapter.AccountsAdapter;
 import Model.Accounts;
+import finapp.publicstatic.com.fintechbankapp.AccountsDividerItemDecoration;
+import finapp.publicstatic.com.fintechbankapp.AccountsRecyclerTouchListener;
 import finapp.publicstatic.com.fintechbankapp.R;
 
 public class AccountsFragment extends Fragment {
@@ -61,7 +65,20 @@ public class AccountsFragment extends Fragment {
         accountsAdapter = new AccountsAdapter(accountList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new AccountsDividerItemDecoration(this.getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.addOnItemTouchListener(new AccountsRecyclerTouchListener(this.getActivity().getApplicationContext(), recyclerView, new AccountsRecyclerTouchListener.ClickListener() {
+            public void onClick(View view, int position) {
+                Accounts account = accountList.get(position);
+                Toast.makeText(getActivity(), account.getBankID() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
+
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
         prepareAccountList();
         recyclerView.setAdapter(accountsAdapter);
 
