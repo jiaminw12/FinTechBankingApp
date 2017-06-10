@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements AccountsFragment.
                                 selectedFragment = BillsFragment.newInstance();
                                 break;
                             case R.id.action_account:
-                                selectedFragment = AccountsFragment.newInstance("Asd");
+                                selectedFragment = AccountsFragment.newInstance();
                                 break;
                             case R.id.action_wallet:
                                 selectedFragment = WalletFragment
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements AccountsFragment.
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, AccountsFragment.newInstance("Asd"));
+        transaction.replace(R.id.frame_layout, AccountsFragment.newInstance());
         transaction.commit();
 
         //Used to select an item programmatically

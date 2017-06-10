@@ -1,6 +1,5 @@
-package layout;
+package Adapter;
 
-import android.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import Model.Accounts;
 import finapp.publicstatic.com.fintechbankapp.R;
 
-public class AccountsFragmentAdapter extends RecyclerView.Adapter<AccountsFragmentAdapter.MyViewHolder> {
+public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyViewHolder> {
 
-        private List<AccountsFragmentGetterSetter> moviesList;
+        private List<Accounts> moviesList;
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public TextView title, year, genre;
@@ -26,10 +26,10 @@ public class AccountsFragmentAdapter extends RecyclerView.Adapter<AccountsFragme
             }
         }
 
-     public AccountsFragmentAdapter() {
+     public AccountsAdapter() {
         }
 
-        public AccountsFragmentAdapter(List<AccountsFragmentGetterSetter> moviesList) {
+        public AccountsAdapter(List<Accounts> moviesList) {
             this.moviesList = moviesList;
         }
 
@@ -41,7 +41,7 @@ public class AccountsFragmentAdapter extends RecyclerView.Adapter<AccountsFragme
         }
 
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            AccountsFragmentGetterSetter movie = moviesList.get(position);
+            Accounts movie = moviesList.get(position);
             holder.title.setText(movie.getTitle());
             holder.genre.setText(movie.getGenre());
             holder.year.setText(movie.getYear());

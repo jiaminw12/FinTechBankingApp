@@ -1,12 +1,13 @@
-package layout;
+package Model;
 
-public class AccountsFragmentGetterSetter {
+public class Accounts {
+
     private String title, genre, year;
 
-    public AccountsFragmentGetterSetter() {
+    public Accounts() {
     }
 
-    public AccountsFragmentGetterSetter(String title, String genre, String year) {
+    public Accounts(String title, String genre, String year) {
         this.title = title;
         this.genre = genre;
         this.year = year;
@@ -35,4 +36,5 @@ public class AccountsFragmentGetterSetter {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
 }
