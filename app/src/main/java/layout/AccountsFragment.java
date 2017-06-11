@@ -1,10 +1,13 @@
 package layout;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +27,7 @@ import java.util.List;
 
 import Adapter.AccountsAdapter;
 import Model.Accounts;
+import finapp.publicstatic.com.fintechbankapp.AccountsCardActivity;
 import finapp.publicstatic.com.fintechbankapp.AccountsDividerItemDecoration;
 import finapp.publicstatic.com.fintechbankapp.AccountsRecyclerTouchListener;
 import finapp.publicstatic.com.fintechbankapp.JSONParser;
@@ -83,6 +87,9 @@ public class AccountsFragment extends Fragment {
                 Toast.makeText(getActivity(), v.getText().toString() + " is selected!",
                         Toast
                         .LENGTH_SHORT).show();
+
+                Intent i = new Intent(getActivity(), AccountsCardActivity.class);
+                startActivity(i);
             }
 
             public void onLongClick(View view, int position) {
@@ -102,11 +109,9 @@ public class AccountsFragment extends Fragment {
     }
 
     public class AccountsTask extends AsyncTask<String, String, JSONObject> {
-
         private JSONParser jsonParser = new JSONParser();
         private WebServiceAddress webServiceAddress = new WebServiceAddress();
         private static final String TAG_SUCCESS = "success";
-
         private final String mUserid;
 
         AccountsTask(String userId) {
@@ -115,7 +120,6 @@ public class AccountsFragment extends Fragment {
 
         @Override
         protected JSONObject doInBackground(String... args) {
-
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
@@ -136,7 +140,6 @@ public class AccountsFragment extends Fragment {
         }
 
         protected void onPostExecute(JSONObject json) {
-
             int success = 0;
 
             if (json != null) {

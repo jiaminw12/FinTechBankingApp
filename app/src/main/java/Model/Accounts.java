@@ -3,23 +3,20 @@ package Model;
 public class Accounts {
 
     /*
-    Account ID:
-    User ID: ??
-    Bank ID: 0 - DBS, 1 - Maybank, 2 - OCBC, 3 - Standard Chartered, 4 - HSBC, 5 - UOB
-    Account Num: Get from JSON
-    Type ID: 0 - Credit Card, 1- Debit Card, 2 - Savings Account, 3 - Current Account, 4 - POSB Everyday Card, 5 - OCBC 365 Card
-    Amount: Get from JSON
-     */
-    //private String[] listOfBanks = new String[] {"DBS", "Maybank", "OCBC", "Standard Chartered", "HSBC", "UOB"};
-    //private String[] listOfTypes = new String[]{"Credit Card", "Debit Card", "Savings Account", "Current Account", "POSB Everyday Card", "OCBC 365 Card"};
-
+        Account ID:
+        User ID: ??
+        Bank ID: 0 - DBS, 1 - Maybank, 2 - OCBC, 3 - Standard Chartered, 4 - HSBC, 5 - UOB
+        Account Num: Get from JSON
+        Type ID: 0 - Credit Card, 1- Debit Card, 2 - Savings Account, 3 - Current Account, 4 - POSB Everyday Card, 5 - OCBC 365 Card
+        Amount: Get from JSON
+    */
     private int accountId;
-    private String accountNum;
-    private double amount;
-    private String bankname;
-    private String type_name;
     private int bankId;
     private int typeId;
+    private double amount;
+    private String accountNum;
+    private String bankname;
+    private String type_name;
 
     // Constructors
     public Accounts() {
@@ -90,5 +87,4 @@ public class Accounts {
     public void setTypeId(int typeId) {
         this.typeId = typeId;
     }
-
 }
