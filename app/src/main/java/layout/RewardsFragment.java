@@ -13,29 +13,29 @@ import finapp.publicstatic.com.fintechbankapp.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TransactionFragment.OnFragmentInteractionListener} interface
+ * {@link RewardsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TransactionFragment#newInstance} factory method to
+ * Use the {@link RewardsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TransactionFragment extends Fragment {
+public class RewardsFragment extends Fragment {
 
     private static final String ARG_PARAM = "param";
     private static String mUserId;
 
     private OnFragmentInteractionListener mListener;
 
-    public TransactionFragment() {
+    public RewardsFragment() {
         // Required empty public constructor
     }
 
-    public static TransactionFragment newInstance() {
-        TransactionFragment fragment = new TransactionFragment();
+    public static RewardsFragment newInstance() {
+        RewardsFragment fragment = new RewardsFragment();
         return fragment;
     }
 
-    public static TransactionFragment newInstance(String param) {
-        TransactionFragment fragment = new TransactionFragment();
+    public static RewardsFragment newInstance(String param) {
+        RewardsFragment fragment = new RewardsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM, param);
         fragment.setArguments(args);

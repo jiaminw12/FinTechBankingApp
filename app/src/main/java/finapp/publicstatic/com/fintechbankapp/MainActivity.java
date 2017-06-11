@@ -10,13 +10,12 @@ import android.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import layout.AccountsFragment;
-import layout.BillsFragment;
-import layout.TransactionFragment;
+import layout.BillsTransferFragment;
+import layout.RewardsFragment;
 import layout.PlannerFragment;
 import layout.WalletFragment;
 
-public class MainActivity extends AppCompatActivity implements AccountsFragment.OnFragmentInteractionListener, BillsFragment.OnFragmentInteractionListener, TransactionFragment.OnFragmentInteractionListener, PlannerFragment.OnFragmentInteractionListener, WalletFragment.OnFragmentInteractionListener
-{
+public class MainActivity extends AppCompatActivity implements AccountsFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener, PlannerFragment.OnFragmentInteractionListener, WalletFragment.OnFragmentInteractionListener {
 
     private String userId;
 
@@ -38,19 +37,19 @@ public class MainActivity extends AppCompatActivity implements AccountsFragment.
                         Fragment selectedFragment = null;
 
                         switch (item.getItemId()) {
-                            case R.id.action_transac:
-                                selectedFragment = TransactionFragment
-                                        .newInstance(userId);
-                                break;
                             case R.id.action_bill:
-                                selectedFragment = BillsFragment.newInstance(userId);
+                                selectedFragment = BillsTransferFragment.newInstance(userId);
+                                break;
+                            case R.id.action_wallet:
+                                selectedFragment = WalletFragment
+                                        .newInstance(userId);
                                 break;
                             case R.id.action_account:
                                 selectedFragment = AccountsFragment
                                         .newInstance(userId);
                                 break;
-                            case R.id.action_wallet:
-                                selectedFragment = WalletFragment
+                            case R.id.action_rewards:
+                                selectedFragment = RewardsFragment
                                         .newInstance(userId);
                                 break;
                             case R.id.action_budget_planner:
@@ -65,17 +64,10 @@ public class MainActivity extends AppCompatActivity implements AccountsFragment.
                     }
                 });
 
-        //Manually displaying the first fragment - one time only
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, AccountsFragment.newInstance
-                (userId));
-        transaction.commit();
-
-        //Used to select an item programmatically
-        //bottomNavigationView.getMenu().getItem(2).setChecked(true);
+        bottomNavigationView.setSelectedItemId(R.id.action_account);
     }
 
-    public void onFragmentInteraction(Uri uri){
+    public void onFragmentInteraction(Uri uri) {
         //you can leave it empty
     }
 }

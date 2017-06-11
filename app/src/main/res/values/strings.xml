@@ -9,8 +9,10 @@
     <string name="wallet">Wallet</string>
     <string name="bill">Bill</string>
     <string name="transaction">Transaction</string>
+    <string name="trans">Transfer/Bill</string>
     <string name="rewards">Rewards</string>
     <string name="planner">Planner</string>
+    <string name="logout">Logout</string>
 
 
     <!-- Strings related to login -->
