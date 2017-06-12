@@ -2,50 +2,50 @@ package Model;
 
 public class Accounts {
 
-    /*
-        Account ID:
-        User ID: ??
-        Bank ID: 0 - DBS, 1 - Maybank, 2 - OCBC, 3 - Standard Chartered, 4 - HSBC, 5 - UOB
-        Account Num: Get from JSON
-        Type ID: 0 - Credit Card, 1- Debit Card, 2 - Savings Account, 3 - Current Account, 4 - POSB Everyday Card, 5 - OCBC 365 Card
-        Amount: Get from JSON
-    */
-    private int accountId;
-    private int bankId;
-    private int typeId;
+    private int accountID;
+    private int bankID;
+    private int typeID;
     private double amount;
     private String accountNum;
-    private String bankname;
-    private String type_name;
+    private String bankName;
+    private String typeName;
 
     // Constructors
     public Accounts() {
     }
 
-    public Accounts(int accountId, String accountNum, double amount, String bankname, String type_name, int bankId, int typeId) {
-        this.accountId = accountId;
-        this.accountNum = accountNum;
+    public Accounts(int accountID, int bankID, int typeID, double amount, String accountNum, String bankName, String typeName) {
+        this.accountID = accountID;
+        this.bankID = bankID;
+        this.typeID = typeID;
         this.amount = amount;
-        this.bankname = bankname;
-        this.type_name = type_name;
-        this.bankId = bankId;
-        this.typeId = typeId;
-    }
-
-    public int getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getAccountNum() {
-        return accountNum;
-    }
-
-    public void setAccountNum(String accountNum) {
         this.accountNum = accountNum;
+        this.bankName = bankName;
+        this.typeName = typeName;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+    }
+
+    public int getBankID() {
+        return bankID;
+    }
+
+    public void setBankID(int bankID) {
+        this.bankID = bankID;
+    }
+
+    public int getTypeID() {
+        return typeID;
+    }
+
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
     }
 
     public double getAmount() {
@@ -56,35 +56,27 @@ public class Accounts {
         this.amount = amount;
     }
 
-    public String getBankname() {
-        return bankname;
+    public String getAccountNum() {
+        return accountNum;
     }
 
-    public void setBankname(String bankname) {
-        this.bankname = bankname;
+    public void setAccountNum(String accountNum) {
+        this.accountNum = accountNum;
     }
 
-    public String getType_name() {
-        return type_name;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setType_name(String type_name) {
-        this.type_name = type_name;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
-    public int getBankId() {
-        return bankId;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setBankId(int bankId) {
-        this.bankId = bankId;
-    }
-
-    public int getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }
