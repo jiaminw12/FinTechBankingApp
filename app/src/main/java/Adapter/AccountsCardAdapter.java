@@ -78,9 +78,9 @@ public class AccountsCardAdapter extends RecyclerView.Adapter<AccountsCardAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.itemTitle.setText(titles[i]);
-        viewHolder.itemDetail.setText(details[i]);
-        viewHolder.itemImage.setImageResource(images[i]);
+        viewHolder.itemTitle.setText(titles[0]);
+        viewHolder.itemDetail.setText(details[0]);
+        viewHolder.itemImage.setImageResource(images[0]);
     }
 
     @Override
