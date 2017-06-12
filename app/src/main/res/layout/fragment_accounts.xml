@@ -6,8 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/fragment_bank"
-        tools:context="layout.BankFragment">
+        tools:showIn="@layout/fragment_accounts"
+        tools:context="layout.AccountsFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"

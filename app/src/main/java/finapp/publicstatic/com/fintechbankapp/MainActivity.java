@@ -9,13 +9,13 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.view.MenuItem;
 
-import layout.BankFragment;
+import layout.AccountsFragment;
 import layout.BillsTransferFragment;
 import layout.RewardsFragment;
 import layout.PlannerFragment;
 import layout.WalletFragment;
 
-public class MainActivity extends AppCompatActivity implements BankFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener, PlannerFragment.OnFragmentInteractionListener, WalletFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements AccountsFragment.OnFragmentInteractionListener, RewardsFragment.OnFragmentInteractionListener, PlannerFragment.OnFragmentInteractionListener, WalletFragment.OnFragmentInteractionListener {
 
     private String userId;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements BankFragment.OnFr
                                         .newInstance(userId);
                                 break;
                             case R.id.action_account:
-                                selectedFragment = BankFragment
+                                selectedFragment = AccountsFragment
                                         .newInstance(userId);
                                 break;
                             case R.id.action_rewards:
