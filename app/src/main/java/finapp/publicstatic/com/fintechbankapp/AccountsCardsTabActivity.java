@@ -13,16 +13,26 @@ public class AccountsCardsTabActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accounts_cards_tab);
 
+        Bundle bundle = getIntent().getExtras();
+        String userID = bundle.getString("userId");
+        String bankID = bundle.getString("userId");
+
         TabHost tabHost = getTabHost();
         Intent intentAccounts = new Intent().setClass(this, AccountsActivity.class);
+        intentAccounts.putExtra("bankId", bankID);
+        intentAccounts.putExtra("userId", userID);
         TabSpec tabSpecAccounts = tabHost
                 .newTabSpec("Accounts")
-                .setContent(intentAccounts);
+                .setContent(intentAccounts)
+                .setIndicator("Accounts");
 
         Intent intentCards = new Intent().setClass(this, CardsActivity.class);
+        intentCards.putExtra("bankId", bankID);
+        intentCards.putExtra("userId", userID);
         TabSpec tabSpecCards = tabHost
                 .newTabSpec("Cards")
-                .setContent(intentCards);
+                .setContent(intentCards)
+                .setIndicator("Cards");
 
         // Add all tabs
         tabHost.addTab(tabSpecAccounts);

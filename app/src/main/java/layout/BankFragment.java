@@ -82,8 +82,8 @@ public class BankFragment extends Fragment {
                 Toast.makeText(getActivity(), textView.getText().toString() + " is selected!", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), AccountsCardsTabActivity.class);
-                intent.putExtra("bankID", textView.getText().toString());
-                intent.putExtra("userID", userID);
+                intent.putExtra("bankId", textView.getText().toString());
+                intent.putExtra("userId", userID);
                 startActivity(intent);
             }
 

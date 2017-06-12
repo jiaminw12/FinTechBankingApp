@@ -35,8 +35,8 @@ public class AccountsActivity extends AppCompatActivity {
         setContentView(R.layout.fragments_accounts_cardview2);
 
         Bundle bundle = getIntent().getExtras();
-        muserID = bundle.getString("userID");
-        mBankID = bundle.getString("bankID");
+        muserID = bundle.getString("userId");
+        mBankID = bundle.getString("bankId");
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         accountsAdapter = new AccountsAdapter(accountList);
@@ -87,8 +87,6 @@ public class AccountsActivity extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("userId", mUserid);
                 params.put("bankId", mBankId);
-                Log.e("userId", mUserid);
-                Log.e("bankId", mBankId);
                 JSONObject json = jsonParser.makeHttpRequest("POST", webServiceAddress.getBaseUrl("getAllAccountsByUserid"), params);
 
                 if (json != null) {
