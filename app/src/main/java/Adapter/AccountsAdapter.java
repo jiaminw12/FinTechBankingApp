@@ -6,33 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.Accounts;
 import finapp.publicstatic.com.fintechbankapp.R;
 
-public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyViewHolder> {
-    /*
-       Account ID:
-       User ID: ??
-       Bank ID: 0 - DBS, 1 - Maybank, 2 - OCBC, 3 - Standard Chartered, 4 - HSBC, 5 - UOB
-       Account Num: Get from JSON
-       Type ID: 0 - Credit Card, 1- Debit Card, 2 - Savings Account, 3 - Current Account, 4 - POSB Everyday Card, 5 - OCBC 365 Card
-       Amount: Get from JSON
-    */
-    private List<Accounts> accountList;
+public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHolder> {
+    private List<Accounts> accountList = new ArrayList<>();
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView typeName;
+        public TextView accountNum;
+        public TextView amount;
 
-        public TextView accountID, bankID, accountNum, typeID, amount;
-
-        public MyViewHolder(View view) {
-            super(view);
-            accountID = (TextView) view.findViewById(R.id.accountID);
-            bankID = (TextView) view.findViewById(R.id.bankID);
-            accountNum = (TextView) view.findViewById(R.id.accountNum);
-            typeID = (TextView) view.findViewById(R.id.typeID);
-            amount = (TextView) view.findViewById(R.id.amount);
+        public ViewHolder(View itemView) {
+            super(itemView);
+            typeName = (TextView)itemView.findViewById(R.id.typeName);
+            accountNum = (TextView)itemView.findViewById(R.id.accountNum);
+            amount = (TextView)itemView.findViewById(R.id.amount);
         }
     }
 
@@ -43,22 +35,22 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.MyView
         this.accountList = accountList;
     }
 
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragments_accounts_row, parent, false);
-
-        return new MyViewHolder(itemView);
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragments_accounts_cardview, viewGroup, false);
+        ViewHolder viewHolder = new ViewHolder(v);
+        return viewHolder;
     }
 
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
         Accounts account = accountList.get(position);
-        holder.accountID.setText(String.valueOf(account.getAccountId()));
-        holder.bankID.setText(account.getBankname());
-        holder.accountNum.setText(account.getAccountNum());
-        holder.typeID.setText(account.getType_name());
-        holder.amount.setText(String.valueOf(account.getAmount()));
+        viewHolder.typeName.setText(account.getTypeName());
+        viewHolder.accountNum.setText(account.getAccountNum());
+        viewHolder.amount.setText(String.valueOf(account.getAmount()));
     }
 
+    @Override
     public int getItemCount() {
         return accountList.size();
     }

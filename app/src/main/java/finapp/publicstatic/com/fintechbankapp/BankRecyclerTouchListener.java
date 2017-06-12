@@ -6,7 +6,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class AccountsRecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+public class BankRecyclerTouchListener implements RecyclerView.OnItemTouchListener {
     public interface ClickListener {
         void onClick(View view, int position);
         void onLongClick(View view, int position);
@@ -15,7 +15,7 @@ public class AccountsRecyclerTouchListener implements RecyclerView.OnItemTouchLi
     private GestureDetector gestureDetector;
     private ClickListener clickListener;
 
-    public AccountsRecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+    public BankRecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
         this.clickListener = clickListener;
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -49,6 +49,5 @@ public class AccountsRecyclerTouchListener implements RecyclerView.OnItemTouchLi
 
     @Override
     public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
     }
 }
