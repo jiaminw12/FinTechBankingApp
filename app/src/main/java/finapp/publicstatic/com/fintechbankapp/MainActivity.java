@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity implements BankFragment.OnFr
 
                         switch (item.getItemId()) {
                             case R.id.action_bill:
-                                selectedFragment = BillsTransferFragment.newInstance(userId);
+                                selectedFragment = BillsTransferFragment
+                                        .newInstance(userId);
                                 break;
                             case R.id.action_wallet:
                                 selectedFragment = WalletFragment

@@ -360,8 +360,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (json != null) {
                 try {
                     success = json.getInt(TAG_SUCCESS);
-                    Toast.makeText(LoginActivity.this, json.getString(TAG_MESSAGE),
-                            Toast.LENGTH_LONG).show();
                     if(success == 1){
                         Intent intent = new Intent(getApplicationContext(),
                                 MainActivity.class);
