@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 
 import Adapter.BankAdapter;
+import Model.Banks;
 import finapp.publicstatic.com.fintechbankapp.AccountsActivity;
 import finapp.publicstatic.com.fintechbankapp.AccountsCardsTabActivity;
 import finapp.publicstatic.com.fintechbankapp.BankDividerItemDecoration;
@@ -40,7 +41,8 @@ public class BankFragment extends Fragment {
     private BankAdapter bankAdapter;
     private BankTask mAuthAcc = null;
     private RecyclerView recyclerView;
-    private List<String> bankList = new ArrayList<>();
+
+    private ArrayList<Banks> bankList = new ArrayList<>();
     private BankFragment.OnFragmentInteractionListener mListener;
 
     public static BankFragment newInstance() {
@@ -71,6 +73,7 @@ public class BankFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bank, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         bankAdapter = new BankAdapter(bankList);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addItemDecoration(new BankDividerItemDecoration(this.getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
@@ -79,11 +82,9 @@ public class BankFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new BankRecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new BankRecyclerTouchListener.ClickListener() {
             public void onClick(View view, int position) {
                 TextView textView = (TextView) view.findViewById(R.id.bankID);
-                Toast.makeText(getActivity(), textView.getText().toString() + " is selected!", Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(getActivity(), AccountsCardsTabActivity.class);
-                intent.putExtra("bankId", textView.getText().toString());
                 intent.putExtra("userId", userID);
+                intent.putExtra("bankId", textView.getText().toString());
                 startActivity(intent);
             }
 
@@ -119,7 +120,7 @@ public class BankFragment extends Fragment {
 
                 HashMap<String, String> params = new HashMap<>();
                 params.put("userId", mUserid);
-                JSONObject json = jsonParser.makeHttpRequest("POST", webServiceAddress.getBaseUrl("getAllAccountsByUserid"), params);
+                JSONObject json = jsonParser.makeHttpRequest("POST", webServiceAddress.getBaseUrl("getAllAccountsDistinctByUserId"), params);
 
                 if (json != null) {
                     return json;
@@ -141,14 +142,12 @@ public class BankFragment extends Fragment {
 
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject obj = jsonArray.getJSONObject(i);
-                            bankList.add(obj.getString("bankname"));
-                        }
+                            Banks bank = new Banks();
+                            bank.setBankId(obj.getInt("bankId"));
+                            bank.setBankname(obj.getString("bankname"));
 
-                        // Remove duplicates
-                        Set<String> tempSet = new HashSet<>();
-                        tempSet.addAll(bankList);
-                        bankList.clear();
-                        bankList.addAll(tempSet);
+                            bankList.add(bank);
+                        }
                     }
                     recyclerView.setAdapter(bankAdapter);
                 } catch (JSONException e) {

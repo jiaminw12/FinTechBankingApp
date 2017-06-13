@@ -8,17 +8,20 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import Model.Banks;
 import finapp.publicstatic.com.fintechbankapp.R;
 
 public class BankAdapter extends RecyclerView.Adapter<BankAdapter.MyViewHolder> {
-    private List<String> bankList;
+    private List<Banks> bankList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
+        public TextView bankName;
         public TextView bankID;
 
         public MyViewHolder(View view) {
             super(view);
+            bankName = (TextView) view.findViewById(R.id.bankName);
             bankID = (TextView) view.findViewById(R.id.bankID);
         }
     }
@@ -26,17 +29,19 @@ public class BankAdapter extends RecyclerView.Adapter<BankAdapter.MyViewHolder> 
     public BankAdapter() {
     }
 
-    public BankAdapter(List<String> bankList) {
+    public BankAdapter(List<Banks> bankList) {
         this.bankList = bankList;
     }
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragments_bank_row, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_bank_row, parent, false);
         return new MyViewHolder(itemView);
     }
 
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.bankID.setText(bankList.get(position));
+        Banks bank = bankList.get(position);
+        holder.bankName.setText(bank.getBankname());
+        holder.bankID.setText(String.valueOf(bank.getBankId()));
     }
 
     public int getItemCount() {

@@ -53,7 +53,7 @@ public class CardsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.card_layout, menu);
+        //getMenuInflater().inflate(R.menu.card_layout, menu);
         return true;
     }
 
@@ -102,7 +102,7 @@ public class CardsActivity extends AppCompatActivity {
             return null;
         }
 
-        protected void onPostExecute(JSONObject json, JSONObject json2) {
+        protected void onPostExecute(JSONObject json) {
             int success = 0;
 
             if (json != null) {

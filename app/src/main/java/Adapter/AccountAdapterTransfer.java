@@ -62,8 +62,8 @@ public class AccountAdapterTransfer extends ArrayAdapter<Accounts> {
 
         accountId.setText(String.valueOf(accountList.get(position)
                 .getAccountID()));
-        accountAmt.setText(String.valueOf(accountList.get(position).getAmount
-                ()));
+        accountAmt.setText("$ " + String.format("%.2f", accountList.get
+                (position).getAmount()));
         accountNum.setText(accountList.get(position).getAccountNum());
         return convertView;
     }

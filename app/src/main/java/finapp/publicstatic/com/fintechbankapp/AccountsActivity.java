@@ -26,7 +26,6 @@ public class AccountsActivity extends AppCompatActivity {
     private String muserID;
     private String mBankID;
     private AccountsAdapter accountsAdapter;
-    private AccountsCardsTask mAccountsTask = null;
     private List<Accounts> accountList = new ArrayList<>();
 
     @Override
@@ -40,8 +39,9 @@ public class AccountsActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         accountsAdapter = new AccountsAdapter(accountList);
-        mAccountsTask = new AccountsCardsTask(muserID, mBankID);
-        mAccountsTask.execute((String) null);
+
+        new AccountsCardsTask(muserID, mBankID).execute();
+
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(accountsAdapter);
@@ -50,7 +50,7 @@ public class AccountsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.card_layout, menu);
+        //getMenuInflater().inflate(R.menu.card_layout, menu);
         return true;
     }
 
@@ -87,7 +87,8 @@ public class AccountsActivity extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<>();
                 params.put("userId", mUserid);
                 params.put("bankId", mBankId);
-                JSONObject json = jsonParser.makeHttpRequest("POST", webServiceAddress.getBaseUrl("getAllAccountsByUserid"), params);
+
+                JSONObject json = jsonParser.makeHttpRequest("POST", webServiceAddress.getBaseUrl("getAllAccountsByUserIdAndBankId"), params);
 
                 if (json != null) {
                     return json;
@@ -98,7 +99,7 @@ public class AccountsActivity extends AppCompatActivity {
             return null;
         }
 
-        protected void onPostExecute(JSONObject json, JSONObject json2) {
+        protected void onPostExecute(JSONObject json) {
             int success = 0;
 
             if (json != null) {
@@ -111,12 +112,12 @@ public class AccountsActivity extends AppCompatActivity {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             Accounts account = new Accounts();
                             account.setAccountID(jsonObject.getInt("accountId"));
-                            account.setBankID(jsonObject.getInt("bankId"));
-                            account.setTypeID(jsonObject.getInt("typeId"));
-                            account.setAmount(jsonObject.getDouble("amount"));
                             account.setAccountNum(jsonObject.getString("accountNum"));
+                            account.setAmount(jsonObject.getDouble("amount"));
                             account.setBankName(jsonObject.getString("bankname"));
                             account.setTypeName(jsonObject.getString("type_name"));
+                            account.setBankID(jsonObject.getInt("bankId"));
+                            account.setTypeID(jsonObject.getInt("typeId"));
 
                             //Add your values in your `ArrayList` as below:
                             accountList.add(account);
@@ -127,10 +128,6 @@ public class AccountsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }
-
-        @Override
-        protected void onCancelled() {
         }
     }
 }

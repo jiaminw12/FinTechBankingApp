@@ -47,7 +47,8 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHo
         Accounts account = accountList.get(position);
         viewHolder.typeName.setText(account.getTypeName());
         viewHolder.accountNum.setText(account.getAccountNum());
-        viewHolder.amount.setText(String.valueOf(account.getAmount()));
+        viewHolder.amount.setText("$ " + String.format("%.2f", account
+                .getAmount()));
     }
 
     @Override
