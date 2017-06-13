@@ -28,7 +28,6 @@ public class CardsActivity extends AppCompatActivity {
     private CardsAdapter cardsAdapter;
     private AccountsCardsTask mCardsTask = null;
     private List<Cards> cardList = new ArrayList<>();
-    private List<Accounts> accountList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -66,6 +66,7 @@
     </string-array>
 
 
+    <string name="string_add_card">Add a card</string>
 
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>
