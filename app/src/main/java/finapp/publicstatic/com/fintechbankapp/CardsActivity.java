@@ -2,11 +2,9 @@ package finapp.publicstatic.com.fintechbankapp;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -35,7 +33,7 @@ public class CardsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragments_cards_cardview2);
+        setContentView(R.layout.fragment_cards_cardview2);
 
         Bundle bundle = getIntent().getExtras();
         muserID = bundle.getString("userId");

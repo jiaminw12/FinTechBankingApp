@@ -9,7 +9,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Accounts;
 import Model.Cards;
 import finapp.publicstatic.com.fintechbankapp.R;
 
@@ -40,7 +39,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragments_cards_cardview, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_cards_cardview, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }

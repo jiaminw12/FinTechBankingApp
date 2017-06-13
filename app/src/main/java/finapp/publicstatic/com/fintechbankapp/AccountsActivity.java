@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,7 +30,7 @@ public class AccountsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragments_accounts_cardview2);
+        setContentView(R.layout.fragment_accounts_cardview2);
 
         Bundle bundle = getIntent().getExtras();
         muserID = bundle.getString("userId");
