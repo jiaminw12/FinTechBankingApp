@@ -16,7 +16,7 @@ import android.text.TextUtils;
 
 import finapp.publicstatic.com.fintechbankapp.R;
 
-public class BillsFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class BillsFragment extends Fragment  {
 
     private static final String ARG_PARAM = "param";
     private static String mUserId;
@@ -40,7 +40,7 @@ public class BillsFragment extends Fragment implements SearchView.OnQueryTextLis
         return fragment;
     }
 
-    @Override
+  /*  @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -102,7 +102,7 @@ public class BillsFragment extends Fragment implements SearchView.OnQueryTextLis
     public boolean onQueryTextSubmit(String query) {
         return false;
     }
-
+*/
 }
 
 

@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,13 +20,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import Adapter.BankAdapter;
 import Model.Banks;
-import finapp.publicstatic.com.fintechbankapp.AccountsActivity;
 import finapp.publicstatic.com.fintechbankapp.AccountsCardsTabActivity;
 import finapp.publicstatic.com.fintechbankapp.BankDividerItemDecoration;
 import finapp.publicstatic.com.fintechbankapp.BankRecyclerTouchListener;
@@ -41,7 +36,6 @@ public class BankFragment extends Fragment {
     private BankAdapter bankAdapter;
     private BankTask mAuthAcc = null;
     private RecyclerView recyclerView;
-
     private ArrayList<Banks> bankList = new ArrayList<>();
     private BankFragment.OnFragmentInteractionListener mListener;
 
@@ -103,10 +97,10 @@ public class BankFragment extends Fragment {
     }
 
     public class BankTask extends AsyncTask<String, String, JSONObject> {
+        private final String mUserid;
+        private static final String TAG_SUCCESS = "success";
         private JSONParser jsonParser = new JSONParser();
         private WebServiceAddress webServiceAddress = new WebServiceAddress();
-        private static final String TAG_SUCCESS = "success";
-        private final String mUserid;
 
         BankTask(String userID) {
             mUserid = userID;
@@ -145,7 +139,6 @@ public class BankFragment extends Fragment {
                             Banks bank = new Banks();
                             bank.setBankId(obj.getInt("bankId"));
                             bank.setBankname(obj.getString("bankname"));
-
                             bankList.add(bank);
                         }
                     }
@@ -154,10 +147,6 @@ public class BankFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-        }
-
-        @Override
-        protected void onCancelled() {
         }
     }
 

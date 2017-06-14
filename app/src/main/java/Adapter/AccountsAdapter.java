@@ -28,17 +28,14 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHo
         }
     }
 
-    public AccountsAdapter() {
-    }
-
     public AccountsAdapter(List<Accounts> accountList) {
         this.accountList = accountList;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_accounts_cardview, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(v);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View accountView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_accounts_cardview, viewGroup, false);
+        ViewHolder viewHolder = new ViewHolder(accountView);
         return viewHolder;
     }
 
@@ -47,8 +44,7 @@ public class AccountsAdapter extends RecyclerView.Adapter<AccountsAdapter.ViewHo
         Accounts account = accountList.get(position);
         viewHolder.typeName.setText(account.getTypeName());
         viewHolder.accountNum.setText(account.getAccountNum());
-        viewHolder.amount.setText("$ " + String.format("%.2f", account
-                .getAmount()));
+        viewHolder.amount.setText("$ " + String.format("%.2f", account.getAmount()));
     }
 
     @Override

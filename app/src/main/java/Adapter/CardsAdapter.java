@@ -30,17 +30,14 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         }
     }
 
-    public CardsAdapter() {
-    }
-
     public CardsAdapter(List<Cards> cardList) {
         this.cardList = cardList;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_cards_cardview, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(v);
+    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View cardsView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_cards_cardview, viewGroup, false);
+        ViewHolder viewHolder = new ViewHolder(cardsView);
         return viewHolder;
     }
 
@@ -49,7 +46,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         Cards cards = cardList.get(position);
         viewHolder.cardName.setText(String.valueOf(cards.getCardName()));
         viewHolder.cardNum.setText(String.valueOf(cards.getCardNum()));
-        viewHolder.cardExpiryDate.setText(String.valueOf(cards.getCardExpiryDate()));
+        viewHolder.cardExpiryDate.setText(String.valueOf("Expiry Date: " + cards.getCardExpiryDate()));
         if(cards.getActivate() == 0) {
             viewHolder.activate.setText("Not activated");
         } else {

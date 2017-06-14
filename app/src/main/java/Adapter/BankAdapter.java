@@ -19,31 +19,29 @@ public class BankAdapter extends RecyclerView.Adapter<BankAdapter.MyViewHolder> 
         public TextView bankName;
         public TextView bankID;
 
-        public MyViewHolder(View view) {
-            super(view);
-            bankName = (TextView) view.findViewById(R.id.bankName);
-            bankID = (TextView) view.findViewById(R.id.bankID);
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            bankName = (TextView) itemView.findViewById(R.id.bankName);
+            bankID = (TextView) itemView.findViewById(R.id.bankID);
         }
-    }
-
-    public BankAdapter() {
     }
 
     public BankAdapter(List<Banks> bankList) {
         this.bankList = bankList;
     }
 
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_bank_row, parent, false);
-        return new MyViewHolder(itemView);
+    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View bankView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_bank_row, viewGroup, false);
+        return new MyViewHolder(bankView);
     }
 
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder viewHolder, int position) {
         Banks bank = bankList.get(position);
-        holder.bankName.setText(bank.getBankname());
-        holder.bankID.setText(String.valueOf(bank.getBankId()));
+        viewHolder.bankName.setText(bank.getBankname());
+        viewHolder.bankID.setText(String.valueOf(bank.getBankId()));
     }
 
+    @Override
     public int getItemCount() {
         return bankList.size();
     }

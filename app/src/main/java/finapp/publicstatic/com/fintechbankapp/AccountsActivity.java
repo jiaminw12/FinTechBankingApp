@@ -48,8 +48,6 @@ public class AccountsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.card_layout, menu);
         return true;
     }
 
@@ -66,11 +64,11 @@ public class AccountsActivity extends AppCompatActivity {
     }
 
     public class AccountsCardsTask extends AsyncTask<String, String, JSONObject> {
-        private JSONParser jsonParser = new JSONParser();
-        private WebServiceAddress webServiceAddress = new WebServiceAddress();
-        private static final String TAG_SUCCESS = "success";
         private final String mUserid;
         private final String mBankId;
+        private static final String TAG_SUCCESS = "success";
+        private JSONParser jsonParser = new JSONParser();
+        private WebServiceAddress webServiceAddress = new WebServiceAddress();
 
         AccountsCardsTask(String userId, String bankId) {
             mUserid = userId;

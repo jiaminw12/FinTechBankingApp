@@ -34,11 +34,11 @@ public class BankRecyclerTouchListener implements RecyclerView.OnItemTouchListen
     }
 
     @Override
-    public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+    public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
 
-        View child = rv.findChildViewUnder(e.getX(), e.getY());
-        if (child != null && clickListener != null && gestureDetector.onTouchEvent(e)) {
-            clickListener.onClick(child, rv.getChildPosition(child));
+        View child = recyclerView.findChildViewUnder(motionEvent.getX(), motionEvent.getY());
+        if (child != null && clickListener != null && gestureDetector.onTouchEvent(motionEvent)) {
+            clickListener.onClick(child, recyclerView.getChildPosition(child));
         }
         return false;
     }

@@ -37,7 +37,7 @@ public class AccountsCardsTabActivity extends TabActivity {
         tabHost.addTab(tabSpecAccounts);
         tabHost.addTab(tabSpecCards);
 
-        // Set Windows tab as default (zero based)
+        // Set default tab
         tabHost.setCurrentTab(2);
     }
 }

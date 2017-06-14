@@ -21,13 +21,13 @@ import Model.Accounts;
 import Model.Cards;
 
 public class CardsActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
     private String muserID;
     private String mBankID;
     private CardsAdapter cardsAdapter;
     private AccountsCardsTask mCardsTask = null;
     private List<Cards> cardList = new ArrayList<>();
+    RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +49,6 @@ public class CardsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.card_layout, menu);
         return true;
     }
 
@@ -67,11 +65,11 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     public class AccountsCardsTask extends AsyncTask<String, String, JSONObject> {
-        private JSONParser jsonParser = new JSONParser();
-        private WebServiceAddress webServiceAddress = new WebServiceAddress();
-        private static final String TAG_SUCCESS = "success";
         private final String mUserid;
         private final String mBankId;
+        private static final String TAG_SUCCESS = "success";
+        private JSONParser jsonParser = new JSONParser();
+        private WebServiceAddress webServiceAddress = new WebServiceAddress();
 
         AccountsCardsTask(String userId, String bankId) {
             mUserid = userId;
@@ -129,10 +127,6 @@ public class CardsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }
-
-        @Override
-        protected void onCancelled() {
         }
     }
 }

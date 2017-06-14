@@ -15,10 +15,10 @@ public class BankDividerItemDecoration extends RecyclerView.ItemDecoration {
             android.R.attr.listDivider
     };
 
+    private int mOrientation;
+    private Drawable mDivider;
     public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
     public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
-    private Drawable mDivider;
-    private int mOrientation;
 
     public BankDividerItemDecoration(Context context, int orientation) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
@@ -35,15 +35,15 @@ public class BankDividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         if (mOrientation == VERTICAL_LIST) {
-            drawVertical(c, parent);
+            drawVertical(canvas, parent);
         } else {
-            drawHorizontal(c, parent);
+            drawHorizontal(canvas, parent);
         }
     }
 
-    public void drawVertical(Canvas c, RecyclerView parent) {
+    public void drawVertical(Canvas canvas, RecyclerView parent) {
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
 
@@ -54,11 +54,11 @@ public class BankDividerItemDecoration extends RecyclerView.ItemDecoration {
             final int top = child.getBottom() + params.bottomMargin;
             final int bottom = top + mDivider.getIntrinsicHeight();
             mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
+            mDivider.draw(canvas);
         }
     }
 
-    public void drawHorizontal(Canvas c, RecyclerView parent) {
+    public void drawHorizontal(Canvas canvas, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
 
@@ -69,7 +69,7 @@ public class BankDividerItemDecoration extends RecyclerView.ItemDecoration {
             final int left = child.getRight() + params.rightMargin;
             final int right = left + mDivider.getIntrinsicHeight();
             mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
+            mDivider.draw(canvas);
         }
     }
 
