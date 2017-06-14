@@ -51,7 +51,11 @@
     <string name="string_comments">Comments</string>
     <string name="string_transfer">Transfer</string>
     <string name="error_empty_amount">Amount cannot be empty</string>
-    <string name="error_amount">Amount is too large</string>
+    <string name="error_amount">Amount is too high</string>
+    <string name="string_succ_transac">Transaction Successful</string>
+    <string name="string_receipent">Receipent</string>
+    <string name="string_note">Note</string>
+    <string name="string_btn_done">Done</string>
     <string-array name="categoryList">
         <item>Grocery</item>
         <item>Entertainment</item>
@@ -66,7 +70,9 @@
     </string-array>
 
 
+    <!-- Strings related to Wallet-->
     <string name="string_add_card">Add a card</string>
+    <string name="string_scan">SCAN</string>
 
     <item name="visible" type="id"/>
     <item name="masked" type="id"/>

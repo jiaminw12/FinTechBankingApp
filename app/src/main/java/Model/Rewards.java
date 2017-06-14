@@ -9,17 +9,20 @@ public class Rewards {
     private int points;
     private Date createdAt;
     private Date expiryAt;
-    private String cardId;
+    private int cardId;
+    private String cardNum;
 
-
-    public Rewards(int rewardsId, int userId, int points, Date createdAt, Date expiryAt, String cardId) {
+    public Rewards(int rewardsId, int userId, int points, Date createdAt, Date expiryAt, int cardId, String cardNum) {
         this.rewardsId = rewardsId;
         this.userId = userId;
         this.points = points;
         this.createdAt = createdAt;
         this.expiryAt = expiryAt;
         this.cardId = cardId;
+        this.cardNum = cardNum;
     }
+
+    public Rewards(){}
 
     public int getRewardsId() {
         return rewardsId;
@@ -61,12 +64,23 @@ public class Rewards {
         this.expiryAt = expiryAt;
     }
 
-    public String getCardId() {
+
+    public int getCardId() {
         return cardId;
     }
 
-    public void setCardId(String cardId) {
+    public void setCardId(int cardId) {
         this.cardId = cardId;
     }
+
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
+
+
 
 }

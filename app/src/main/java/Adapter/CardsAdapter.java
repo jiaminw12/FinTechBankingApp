@@ -23,10 +23,10 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cardName = (TextView)itemView.findViewById(R.id.cardName);
-            cardNum = (TextView)itemView.findViewById(R.id.cardNum);
-            cardExpiryDate = (TextView)itemView.findViewById(R.id.cardExpiryDate);
-            activate = (TextView)itemView.findViewById(R.id.activate);
+            cardName = (TextView)itemView.findViewById(R.id.title_card_name);
+            cardNum = (TextView)itemView.findViewById(R.id.title_card_num);
+            cardExpiryDate = (TextView)itemView.findViewById(R.id.title_expiryDate);
+            activate = (TextView)itemView.findViewById(R.id.title_activated);
         }
     }
 
@@ -36,7 +36,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View cardsView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_cards_cardview, viewGroup, false);
+        View cardsView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_wallet_cardview, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(cardsView);
         return viewHolder;
     }

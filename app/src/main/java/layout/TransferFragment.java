@@ -50,7 +50,8 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM = "param";
     private static String mUserId;
 
-    private String mAcctId, mAcctNum, mPayeeId, mPayeeAcctNum, mAcctAmount;
+    private String mAcctId, mAcctNum, mPayeeId, mPayeeName, mPayeeAcctNum,
+            mAcctAmount;
 
     public TransferFragment() {}
 
@@ -96,19 +97,19 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
         spinnerPayee.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View v, int position, long id) {
+                TextView payeeName = (TextView) v.findViewById(R.id.payeeName);
                 TextView payeeId = (TextView) v.findViewById(R.id.payeeId);
                 TextView acctNum = (TextView) v.findViewById(R.id.payeeAccNum);
 
+                mPayeeName = payeeName.getText().toString();
                 mPayeeId = payeeId.getText().toString();
                 mPayeeAcctNum = acctNum.getText().toString();
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
 
             }
-
         });
 
         spinnerAccount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -276,6 +277,10 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
         }  else if (Double.parseDouble(mAmt) > Double.parseDouble(mAcctAmount)){
             Toast.makeText(getActivity(), R.string.error_amount, Toast.LENGTH_LONG).show();
         } else {
+
+            double diffAmt = Double.parseDouble(mAcctAmount) - Double
+                    .parseDouble(mAmt);
+
             JSONParser jsonParser = new JSONParser();
             WebServiceAddress webServiceAddress = new WebServiceAddress();
             String TAG_SUCCESS = "success";
@@ -289,6 +294,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
             params.put("transactionDetails", mComment);
             params.put("payeeId", mPayeeId);
             params.put("categoryId", String.valueOf(postionCategory));
+            params.put("amountLeft", String.valueOf(diffAmt));
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
@@ -296,7 +302,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
 
             JSONObject json = jsonParser.makeHttpRequest(
                     "POST", webServiceAddress.getBaseUrl
-                            ("addTransfer"), params);
+                            ("addTransaction"), params);
 
             if (json != null) {
                 try {
@@ -304,7 +310,8 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
                     if(success == 1){
                         /*Intent intent = new Intent(getActivity(),
                                 TransferSuccessActivity.class);
-                        intent.putExtra("userId", json.getString("userId"));
+                        intent.putExtra("payeeName", mPayeeName);
+                        intent.putExtra("comments", mComment);
                         startActivity(intent);*/
                     }
                 } catch (JSONException e) {

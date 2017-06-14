@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import finapp.publicstatic.com.fintechbankapp.R;
 
@@ -12,6 +15,9 @@ public class BillTransferHistoryFragment extends Fragment {
 
     private static final String ARG_PARAM = "param";
     private static String mUserId;
+
+    private Spinner spinnerDate;
+    private Spinner spinnerView;
 
     public BillTransferHistoryFragment() {
         // Required empty public constructor
@@ -43,6 +49,41 @@ public class BillTransferHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transfer, container, false);
+        View historyFragment =  inflater.inflate(R.layout.fragment_transfer,
+                container, false);
+
+        spinnerDate = (Spinner) historyFragment.findViewById(R.id.spinner_payee);
+        spinnerView = (Spinner) historyFragment.findViewById(R.id.spinner_category);
+
+        // Listener called when spinner item selected
+        spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View v, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+
+        });
+
+        spinnerView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View v, int position, long id) {
+                
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+
+        });
+
+
+
+        return historyFragment;
     }
 }
