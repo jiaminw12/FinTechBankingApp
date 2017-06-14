@@ -20,7 +20,7 @@ public class BillsFragment extends Fragment implements SearchView.OnQueryTextLis
 
     private static final String ARG_PARAM = "param";
     private static String mUserId;
-    private SearchView mSearchView=(SearchView)findViewById(R.id._bills);
+
 
     public BillsFragment() {
         // Required empty public constructor
@@ -56,8 +56,16 @@ public class BillsFragment extends Fragment implements SearchView.OnQueryTextLis
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_bill, container, false);
 
-        //For the list
-        ListView listBills = (ListView)findViewById(R.id.list_bills);
+        View view = inflater.inflate(R.layout.fragment_bill, container, false);
+
+
+        //For the list, search and date spinner
+
+
+        ListView listBills = (ListView) view.findViewById(R.id.list_bills);
+        SearchView mSearchView = (SearchView) view.findViewById(R.id.search_bills);
+
+
         //"String" to include the class for reference. and to complete the referencing of the list in adapter.
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
                 inflater.getContext(), android.R.layout.simple_list_item_1, _____);
@@ -68,25 +76,25 @@ public class BillsFragment extends Fragment implements SearchView.OnQueryTextLis
 
     //starts new activity on click for the individual items.
     public void onListItemClick(ListView listview, View itemView, int position, long id) {
-        Intent intent=new Intent(BillsFragment.this, BillTransferHistoryFragment );
+        Intent intent=new Intent(BillsFragment.this, BillsPayment );
         startActivity(intent);
 
     }
 
 
     //search Function
-    private void setupSearchView() {
+    private void setupSearchView(SearchView mSearchView) {
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
         mSearchView.setSubmitButtonEnabled(true);
         mSearchView.setQueryHint("Search Here");
     }
 
-    public boolean onQueryTextChange(String newText) {
+    public boolean onQueryTextChange(ListView listBills, String newText) {
         if (TextUtils.isEmpty(newText)) {
-            ListBills.clearTextFilter();
+            listBills.clearTextFilter();
         } else {
-            ListBills.setFilterText(newText.toString());
+            listBills.setFilterText(newText.toString());
         }
         return true;
     }

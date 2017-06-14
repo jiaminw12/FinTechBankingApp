@@ -12,19 +12,35 @@
         android:text="Tab 1"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
         -->
-
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/GridLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        tools:context=".GridXMLActivity" >
     <android.support.v7.widget.SearchView
         android:id="@+id/search_bills"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"/>
 
+    <Spinner
+        android:id="@+id/spinner_bill_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="showDateOfBill"
+        />
+
+</GridLayout>
     <ListView
         android:id="@+id/list_bills"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/search_bills"/>
+        android:layout_below="@+id/GridLayout1"/>
         <!--    android:entries="@array/____"/>     -->
 
 </RelativeLayout>
