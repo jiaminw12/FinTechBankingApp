@@ -42,6 +42,8 @@
         </activity>
         <activity android:name=".RewardsActivity">
         </activity>
+        <activity android:name=".TransSuccessfulActivity">
+        </activity>
         <activity
             android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
             android:screenOrientation="portrait"/>

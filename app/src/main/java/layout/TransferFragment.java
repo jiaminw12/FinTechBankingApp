@@ -30,7 +30,10 @@ import Model.Payees;
 
 import finapp.publicstatic.com.fintechbankapp.JSONParser;
 import finapp.publicstatic.com.fintechbankapp.R;
+import finapp.publicstatic.com.fintechbankapp.TransSuccessfulActivity;
 import finapp.publicstatic.com.fintechbankapp.WebServiceAddress;
+
+import static android.app.Activity.RESULT_OK;
 
 public class TransferFragment extends Fragment implements View.OnClickListener {
 
@@ -132,7 +135,6 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
             }
 
         });
-
 
         submitBtn = (Button) v.findViewById(R.id.transfer_button);
         submitBtn.setOnClickListener(this);
@@ -307,20 +309,33 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
             if (json != null) {
                 try {
                     success = json.getInt(TAG_SUCCESS);
-                    if(success == 1){
-                        /*Intent intent = new Intent(getActivity(),
-                                TransferSuccessActivity.class);
+                    if (success == 1) {
+                        Intent intent = new Intent(getActivity(),
+                                TransSuccessfulActivity.class);
+                        intent.putExtra("amount", mAmt);
                         intent.putExtra("payeeName", mPayeeName);
-                        intent.putExtra("comments", mComment);
-                        startActivity(intent);*/
+
+                        if (mComment.equals("")) {
+                            intent.putExtra("comments", "");
+                        } else {
+                            intent.putExtra("comments", mComment);
+                        }
+                        startActivityForResult(intent, 10001);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
 
-
-
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        if ((reqCode == 10001) && (resultCode == TransSuccessfulActivity.RESULT_OK)){
+            amtEditText.setText("");
+            commentEdittext.setText("");
+            spinnerAccount.setSelection(0);
+            spinnerPayee.setSelection(0);;
+            spinnerCategory.setSelection(0);;
+        }
     }
 }
