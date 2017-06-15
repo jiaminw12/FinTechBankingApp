@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20sp"
+    tools:context="finapp.publicstatic.com.fintechbankapp.AddAccountActivity">
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/string_add_account"
+        android:textSize="30sp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <Spinner
+        android:id="@+id/spinner_bank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView6"
+        android:layout_marginTop="30dp"
+        android:entries="@array/listOfBank"/>
+
+    <Spinner
+        android:id="@+id/spinner_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinner_bank"
+        android:layout_marginTop="30dp"
+        android:entries="@array/accountType"/>
+
+    <EditText
+        android:id="@+id/et_accountNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinner_account"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/string_accountNum"
+        android:layout_alignParentEnd="true"/>
+
+    <Button
+        android:id="@+id/button_add_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/et_accountNum"
+        android:layout_marginTop="30dp"
+        android:text="@string/string_add_account"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

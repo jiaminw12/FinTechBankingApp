@@ -36,7 +36,7 @@
     <string name="prompt_back_to_login">Already a member? Login</string>
 
 
-    <!-- Strings related to fongerprint scan -->
+    <!-- Strings related to fingerprint scan -->
     <string name="title_fingerprint">One-touch Sign In</string>
     <string name="desc_fingerprint">Please place your fingertip on the scanner to verify your identity</string>
     <string name="note">(Fingerprint sign in makes your app login much faster. Your device should have at least one fingerprint registered in device settings)</string>
@@ -67,6 +67,43 @@
         <item>Investment</item>
         <item>Insurance</item>
         <item>Others</item>
+    </string-array>
+
+
+    <!-- Strings related to Bill Transfer History -->
+    <string-array name="optionDate">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
+    <string-array name="optionView">
+        <item>Payment</item>
+        <item>Transaction</item>
+        <item>Both</item>
+    </string-array>
+
+
+    <!-- Strings related to Bank Fragment-->
+    <string name="string_add_account">Add a account</string>
+    <string name="string_accountNum">Account Number</string>
+    <string-array name="accountType">
+        <item>Curent Accounts</item>
+        <item>Savings Accounts</item>
+        <item>Fixed Deposit Accounts</item>
+    </string-array>
+    <string-array name="listOfBank">
+        <item>DBS Bank Limited</item>
+        <item>POSB Bank</item>
+        <item>UOB Singapore</item>
+        <item>Citibank Singapore</item>
+        <item>Standard Chartered Singapore</item>
+        <item>CIMB Bank Singapore</item>
+        <item>RHB Singapore Bank</item>
+        <item>HSBC Singapore</item>
+        <item>Hong Leong Bank Berhad</item>
+        <item>Oversea-Chinese Banking Corporation Limited (OCBC)</item>
+        <item>Bank of China Limited</item>
     </string-array>
 
 

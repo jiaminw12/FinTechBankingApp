@@ -1,6 +1,7 @@
 package layout;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -24,6 +26,7 @@ import java.util.HashMap;
 import Adapter.BankAdapter;
 import Model.Banks;
 import finapp.publicstatic.com.fintechbankapp.AccountsCardsTabActivity;
+import finapp.publicstatic.com.fintechbankapp.AddAccountActivity;
 import finapp.publicstatic.com.fintechbankapp.BankDividerItemDecoration;
 import finapp.publicstatic.com.fintechbankapp.BankRecyclerTouchListener;
 import finapp.publicstatic.com.fintechbankapp.JSONParser;
@@ -86,9 +89,29 @@ public class BankFragment extends Fragment {
             }
         }));
 
+        Button addAccountBtn = (Button) view.findViewById(R.id
+                .add_account_button);
+        addAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddAccountActivity
+                        .class);
+                intent.putExtra("userId", userID);
+                startActivityForResult(intent,10001);
+            }
+        });
+
         prepareBankList(userID);
         recyclerView.setAdapter(bankAdapter);
         return view;
+    }
+
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        if ((reqCode == 10001) && (resultCode == AddAccountActivity.RESULT_OK)){
+            //refresh fragment
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(this).attach(this).commit();
+        }
     }
 
     private void prepareBankList(String userID) {
