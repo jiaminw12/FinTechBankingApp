@@ -62,7 +62,7 @@
                 android:id="@+id/billCheckBox"
                 android:text="@string/schedule_for_payment"
                 android:layout_above="@id/payButton"
-                android:onClick="onDateSelection"/>
+                android:onClick="onClick"/>
             
             <EditText
                 android:layout_width="wrap_content"
