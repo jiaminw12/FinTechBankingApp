@@ -53,7 +53,7 @@
     <string name="error_empty_amount">Amount cannot be empty</string>
     <string name="error_amount">Amount is too high</string>
     <string name="string_succ_transac">Transaction Successful</string>
-    <string name="string_receipent">Receipent</string>
+    <string name="string_receipent">Recipient</string>
     <string name="string_note">Note</string>
     <string name="string_btn_done">Done</string>
     <string-array name="categoryList">
@@ -85,7 +85,7 @@
 
 
     <!-- Strings related to Bank Fragment-->
-    <string name="string_add_account">Add a account</string>
+    <string name="string_add_account">Add an account</string>
     <string name="string_accountNum">Account Number</string>
     <string-array name="accountType">
         <item>Curent Accounts</item>
@@ -111,7 +111,12 @@
     <string name="string_add_card">Add a card</string>
     <string name="string_scan">SCAN</string>
 
-    <item name="visible" type="id"/>
-    <item name="masked" type="id"/>
 
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
+
+
+    <!-- Strings related to Bill Scheduling -->
+    <string name="payButton">Pay</string>
+    <string name="schedule_for_payment">Schedule for Payment</string>
 </resources>

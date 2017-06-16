@@ -75,7 +75,7 @@ public class BillsFragment extends Fragment  {
     }
 
     //starts new activity on click for the individual items.
-    public void onListItemClick(ListView listview, View itemView, int position, long id) {
+    public void onListItemClick(ListView listBills, View itemView, int position, long id) {
         Intent intent=new Intent(BillsFragment.this, BillsPayment );
         startActivity(intent);
 
