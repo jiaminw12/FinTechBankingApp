@@ -23,8 +23,9 @@
         android:scrollHorizontally="false"
         android:layout_marginLeft="@dimen/standard_padding_small"
         android:layout_marginRight="@dimen/standard_padding_small"
-        android:layout_alignBottom="@+id/item_amount"
-        android:layout_toEndOf="@+id/item_date"/>
+        android:layout_toEndOf="@+id/item_date"
+        android:layout_alignTop="@+id/item_amount"
+        android:layout_alignBottom="@+id/item_amount"/>
 
     <TextView
         android:id="@+id/item_amount"
@@ -35,6 +36,6 @@
         android:textSize="18sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="23dp"/>
+        android:layout_marginTop="35dp"/>
 
 </RelativeLayout>

@@ -13,7 +13,16 @@
               android:layout_gravity="center_vertical"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textSize="18sp"/>
+
+    <TextView android:id="@+id/item_header_amount"
+              android:textStyle="bold"
+              android:layout_weight="1"
+              android:layout_marginLeft="@dimen/standard_padding"
+              android:layout_gravity="center_vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textSize="16sp"/>
 
     <ImageView android:id="@+id/item_arrow"
                android:layout_width="@dimen/arrow_size"

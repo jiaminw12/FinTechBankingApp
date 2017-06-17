@@ -75,7 +75,6 @@
         <item>Daily</item>
         <item>Weekly</item>
         <item>Monthly</item>
-        <item>Yearly</item>
     </string-array>
     <string-array name="optionView">
         <item>Payment</item>

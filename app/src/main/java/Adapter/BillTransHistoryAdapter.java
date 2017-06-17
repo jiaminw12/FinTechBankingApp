@@ -33,12 +33,13 @@ public class BillTransHistoryAdapter extends ExpandableRecyclerAdapter<BillTrans
     }
 
     public static class HistoryListItem extends ExpandableRecyclerAdapter.ListItem {
-        public String Text, mAmount, mPayee;
+        public String Text, mTotalAmt, mAmount, mPayee;
         public Date mDate;
 
-        public HistoryListItem(String dateString) {
+        public HistoryListItem(String dateString, String mTotalAmt) {
             super(TYPE_HEADER);
             Text = dateString;
+            this.mTotalAmt = mTotalAmt;
         }
 
         public HistoryListItem(Date itemDate, String itemAmount, String
@@ -52,17 +53,20 @@ public class BillTransHistoryAdapter extends ExpandableRecyclerAdapter<BillTrans
 
     public class HeaderViewHolder extends ExpandableRecyclerAdapter.HeaderViewHolder {
         TextView name;
+        TextView totalAmount;
 
         public HeaderViewHolder(View view) {
             super(view, (ImageView) view.findViewById(R.id.item_arrow));
 
             name = (TextView) view.findViewById(R.id.item_header_name);
+            totalAmount = (TextView) view.findViewById(R.id.item_header_amount);
         }
 
         public void bind(int position) {
             super.bind(position);
 
             name.setText(visibleItems.get(position).Text);
+            totalAmount.setText("$ " + visibleItems.get(position).mTotalAmt);
         }
     }
 
