@@ -19,6 +19,6 @@
                android:layout_width="@dimen/arrow_size"
                android:layout_height="@dimen/arrow_size"
                android:layout_gravity="center_vertical"
-               android:src="@drawable/ic_keyboard_arrow_down_black_24dp"/>
+               android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
 
 </LinearLayout>

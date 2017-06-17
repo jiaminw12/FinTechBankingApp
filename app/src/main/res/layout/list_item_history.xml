@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal"
               android:padding="@dimen/standard_padding_large">
 
     <TextView
@@ -11,16 +10,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/standard_padding"
-        android:textSize="18sp"/>
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/item_payeeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/standard_padding_small"
         android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:ellipsize="none"
+        android:scrollHorizontally="false"
+        android:layout_marginLeft="@dimen/standard_padding_small"
+        android:layout_marginRight="@dimen/standard_padding_small"
+        android:layout_alignBottom="@+id/item_amount"
+        android:layout_toEndOf="@+id/item_date"/>
 
     <TextView
         android:id="@+id/item_amount"
@@ -28,6 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="50dp"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="23dp"/>
 
-</LinearLayout>
+</RelativeLayout>
