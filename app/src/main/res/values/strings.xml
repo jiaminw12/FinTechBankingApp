@@ -111,6 +111,10 @@
     <string name="string_scan">SCAN</string>
 
 
+    <!-- Strings related to Planner-->
+    <string name="string_header_planner">Total Spending of Category</string>
+
+
     <item name="visible" type="id" />
     <item name="masked" type="id" />
 

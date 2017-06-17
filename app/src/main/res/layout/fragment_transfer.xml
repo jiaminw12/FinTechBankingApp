@@ -1,76 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20sp">
+
+        <Spinner
+            android:id="@+id/spinner_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner_account">
+
+            <EditText
+                android:id="@+id/amount"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="20sp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:hint="@string/string_amount"
+                android:inputType="numberDecimal"
+                android:maxLines="1"/>
 
-    <Spinner
-        android:id="@+id/spinner_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_alignParentStart="true"/>
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textInputLayout"
-        android:layout_below="@+id/spinner_account">
-
-        <EditText
-            android:id="@+id/amount"
+        <Spinner
+            android:id="@+id/spinner_payee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/string_amount"
-            android:inputType="numberDecimal"
-            android:maxLines="1"/>
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textInputLayout"
+            android:layout_marginTop="20dp"/>
 
-    </android.support.design.widget.TextInputLayout>
-
-    <Spinner
-        android:id="@+id/spinner_payee"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/textInputLayout"
-        android:layout_alignParentStart="true"/>
-
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/spinner_payee"
-        android:layout_alignParentStart="true"
-        android:entries="@array/categoryList"/>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/commentsInputLayout"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/spinner_category">
-
-        <EditText
-            android:id="@+id/comments"
+        <Spinner
+            android:id="@+id/spinner_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/string_comments"
-            android:inputType="textAutoComplete"
-            android:maxLines="1"/>
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/spinner_payee"
+            android:layout_marginTop="10dp"
+            android:entries="@array/categoryList"/>
 
-    </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/commentsInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spinner_category"
+            android:layout_marginTop="10dp">
 
-    <Button
-        android:id="@+id/transfer_button"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/string_transfer"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_below="@+id/commentsInputLayout"/>
+            <EditText
+                android:id="@+id/comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/string_comments"
+                android:inputType="textAutoComplete"
+                android:maxLines="1"/>
 
-</RelativeLayout>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/transfer_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/commentsInputLayout"
+            android:layout_marginTop="20dp"
+            android:text="@string/string_transfer"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+
+</ScrollView>
+
+
