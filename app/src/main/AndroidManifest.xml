@@ -44,11 +44,13 @@
         </activity>
         <activity android:name=".TransSuccessfulActivity">
         </activity>
+        <activity android:name=".AddAccountActivity">
+        </activity>
+        <activity android:name=".BillScheduleActivity">
+        </activity>
         <activity
             android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".AddAccountActivity">
-        </activity>
     </application>
 
 </manifest>

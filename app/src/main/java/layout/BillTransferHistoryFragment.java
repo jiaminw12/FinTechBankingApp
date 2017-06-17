@@ -4,6 +4,9 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +14,20 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.innodroid.expandablerecycler.ExpandableRecyclerAdapter;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
+import Adapter.BillTransHistoryAdapter;
 import finapp.publicstatic.com.fintechbankapp.JSONParser;
 import finapp.publicstatic.com.fintechbankapp.R;
 import finapp.publicstatic.com.fintechbankapp.TransSuccessfulActivity;
@@ -28,6 +40,13 @@ public class BillTransferHistoryFragment extends Fragment {
 
     private Spinner spinnerDate;
     private Spinner spinnerView;
+    private RecyclerView recyclerView;
+
+    HashMap<String, String> dateName = new HashMap<>();
+    List<BillTransHistoryAdapter.HistoryListItem> items = new ArrayList<>();
+
+
+    BillTransHistoryAdapter billTransHistoryAdapter;
 
     public BillTransferHistoryFragment() {
         // Required empty public constructor
@@ -59,40 +78,16 @@ public class BillTransferHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View historyFragment =  inflater.inflate(R.layout.fragment_transfer,
+        View historyFragment =  inflater.inflate(R.layout.fragment_bill_transfer_history,
                 container, false);
 
         spinnerDate = (Spinner) historyFragment.findViewById(R.id.spinner_payee);
-        spinnerView = (Spinner) historyFragment.findViewById(R.id.spinner_category);
+        spinnerView = (Spinner) historyFragment.findViewById(R.id.spinner_view);
 
-        // Listener called when spinner item selected
-        spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View v, int position, long id) {
+        recyclerView = (RecyclerView) historyFragment.findViewById(R.id
+                .recycleView_history);
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-
-        });
-
-        spinnerView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View v, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-
-            }
-
-        });
-
-
+        showYearlyMonthlyView();
 
         return historyFragment;
     }
@@ -100,27 +95,13 @@ public class BillTransferHistoryFragment extends Fragment {
 
     private void showYearlyMonthlyView(){
 
-        // https://github.com/thoughtbot/expandable-recycler-view
-        // https://gist.github.com/devrath/1e7af99e468b429a6799
-        // https://gist.github.com/yuviii/accc3d817005940e366f
-        // http://codegists.com/code/expandable-recyclerview-android-example-androidhive/
-
-        //{"history":[{"date":"2017-7","total":"15.00","transRow":[{"transactionId":"7","transactionAmount":"15.00","createdAt":"2017-07-03 07:37:13","payeeName":"Rubi Olaughlin"}]},{"date":"2017-6","total":"3414.90","transRow":[{"transactionId":"6","transactionAmount":"10.00","createdAt":"2017-06-14 15:56:08","payeeName":"Peggy Criss"},
-
-        /*JSONParser jsonParser = new JSONParser();
+        JSONParser jsonParser = new JSONParser();
         WebServiceAddress webServiceAddress = new WebServiceAddress();
         String TAG_SUCCESS = "success";
         int success = 0;
 
         HashMap<String, String> params = new HashMap<>();
-
         params.put("userId", mUserId);
-        params.put("accountId", mAcctId);
-        params.put("transactionAmount", mAmt);
-        params.put("transactionDetails", mComment);
-        params.put("payeeId", mPayeeId);
-        params.put("categoryId", String.valueOf(postionCategory));
-        params.put("amountLeft", String.valueOf(diffAmt));
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
@@ -134,23 +115,56 @@ public class BillTransferHistoryFragment extends Fragment {
             try {
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
-                    Intent intent = new Intent(getActivity(),
-                            TransSuccessfulActivity.class);
-                    intent.putExtra("amount", mAmt);
-                    intent.putExtra("payeeName", mPayeeName);
 
-                    if (mComment.equals("")) {
-                        intent.putExtra("comments", "");
-                    } else {
-                        intent.putExtra("comments", mComment);
+                    //{"history":[{"date":"2017-7","total":"15.00","transRow":[{"transactionId":"7","transactionAmount":"15.00","createdAt":"2017-07-03 07:37:13","payeeName":"Rubi Olaughlin"}]},{"date":"2017-6","total":"3414.90","transRow":[{"transactionId":"6","transactionAmount":"10.00","createdAt":"2017-06-14 15:56:08","payeeName":"Peggy Criss"},
+
+                    JSONArray mHistory = json.getJSONArray("history");
+                    for (int i = 0; i < mHistory.length(); i++) {
+                        JSONObject jsonObject = mHistory.getJSONObject(i);
+
+                        items.add(new BillTransHistoryAdapter.HistoryListItem
+                                (jsonObject.getString
+                                ("date")));
+
+                        JSONArray transArray = jsonObject.getJSONArray
+                                ("transRow");
+                        for(int j = 0; j < transArray.length(); j++){
+                            JSONObject jsonObj = transArray.getJSONObject(j);
+
+                            items.add( new BillTransHistoryAdapter
+                                    .HistoryListItem(
+                                    (formatDate(jsonObj.getString
+                                            ("createdAt"))), jsonObj.getString
+                                    ("transactionAmount"),
+                                    jsonObj.getString("payeeName")));
+                        }
                     }
-                    startActivityForResult(intent, 10001);
                 }
+
+                billTransHistoryAdapter = new BillTransHistoryAdapter
+                        (this.getActivity(), items);
+                billTransHistoryAdapter.setMode(ExpandableRecyclerAdapter.MODE_ACCORDION);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+                recyclerView.setAdapter(billTransHistoryAdapter);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
+    }
 
+    private Date formatDate(String dateString){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd " +
+                "hh:mm:ss");
+
+        Date date=null;
+        try {
+            date = formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
     }
 
 }

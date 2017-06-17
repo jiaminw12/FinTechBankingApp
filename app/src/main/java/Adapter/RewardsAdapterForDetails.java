@@ -48,7 +48,7 @@ public class RewardsAdapterForDetails extends RecyclerView.Adapter<RewardsAdapte
 
     public void onBindViewHolder(MyViewHolder viewHolder, int position) {
         final Rewards reward = rewardList.get(position);
-        viewHolder.totalPts.setText(String.valueOf(reward
+        viewHolder.totalPts.setText("Points :  " + String.valueOf(reward
                 .getPoints()));
 
         Format formatter = new SimpleDateFormat("yyyy-MM-dd");
