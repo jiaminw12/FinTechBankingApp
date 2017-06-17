@@ -5,14 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.text.TextUtils;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 import finapp.publicstatic.com.fintechbankapp.R;
 
@@ -22,6 +27,19 @@ public class BillsFragment extends Fragment  {
     private static String mUserId;
 
 
+    private LayoutInflater inflater;
+    private SearchView searchBills;
+    private Spinner spinnerDate;
+/*
+    List<BillScheduleAdapter.BillName> items= new ArrayList<>;
+
+    BillScheduleAdapter billScheduleAdapter;
+    RetrieveBillSchedule retrieveBillSchedule;
+
+
+
+    //================================================================
+    //Don't know what's going on so not touching.
     public BillsFragment() {
         // Required empty public constructor
     }
@@ -40,7 +58,7 @@ public class BillsFragment extends Fragment  {
         return fragment;
     }
 
-  /*  @Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -48,22 +66,49 @@ public class BillsFragment extends Fragment  {
         }
     }
 
-
+    //=================================================================
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bill, container, false);
 
         View view = inflater.inflate(R.layout.fragment_bill, container, false);
+
+        searchBills = (SearchView) view.findViewById(R.id.search_bills);
+        spinnerDate = (Spinner) view.findViewById(R.id.spinner_bill_date);
+        // (INCOMPLETE) Make a new java class for RetrieveBillSchedule
+        retrieveBillSchedule = new RetrieveBillSchedule();
+
+        spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View view, int position, long id) {
+
+                showView(retrieveBillSchedule.retrieveBillView
+                        (position,
+                                SearchView.;
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        return view;
+
+    }
 
 
         //For the list, search and date spinner
 
+    private void showView(List<BillScheduleAdapter.BillListItem> billItems) {
+        billScheduleAdapter=new BillScheduleAdapter( this.getActivity() billItems);
+        billScheduleAdapter.setMode()
+        billScheduleAdapter.setLayoutManager(new LinearLayoutManager.(this));
 
-        ListView listBills = (ListView) view.findViewById(R.id.list_bills);
-        SearchView mSearchView = (SearchView) view.findViewById(R.id.search_bills);
+
 
 
         //"String" to include the class for reference. and to complete the referencing of the list in adapter.

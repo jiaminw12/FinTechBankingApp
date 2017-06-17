@@ -118,4 +118,7 @@
     <!-- Strings related to Bill Scheduling -->
     <string name="payButton">Pay</string>
     <string name="schedule_for_payment">Schedule for Payment</string>
+    <string name="billPayeeName"></string>
+    <string name="billDate"></string>
+    <string name="billDetails"></string>
 </resources>
