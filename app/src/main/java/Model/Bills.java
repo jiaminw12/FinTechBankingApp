@@ -13,6 +13,8 @@ public class Bills {
     private String issuerName;
     private Date createdAt;
 
+    public Bills(){}
+
     public Bills(int billId, double billAmount, Date dueDate, int userId, int paid, String comment, String issuerName, Date createdAt) {
         this.billId = billId;
         this.billAmount = billAmount;
