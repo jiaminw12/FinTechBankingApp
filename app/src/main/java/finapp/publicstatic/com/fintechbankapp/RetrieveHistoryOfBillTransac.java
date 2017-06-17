@@ -38,13 +38,15 @@ public class RetrieveHistoryOfBillTransac {
             // Daily
             if(positionView == 0){
                 // Daily + Payment
+                showPaymentsView("getPaymentsYearlyDaily", mUserId);
 
             } else if(positionView == 1){
                 // Daily + Transaction
+                showTransactionView("getTransactionsYearlyDaily", mUserId);
 
             } else if(positionView == 2){
                 // Daily + Both
-
+                showTransactionView("getBTYearlyDaily", mUserId);
             }
 
         } else if(positionDate == 1){
