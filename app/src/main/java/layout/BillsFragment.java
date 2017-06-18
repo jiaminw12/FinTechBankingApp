@@ -1,7 +1,6 @@
 package layout;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -14,11 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.text.TextUtils;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +31,8 @@ import java.util.List;
 
 import Adapter.BillAdapter;
 import Model.Bills;
+import finapp.publicstatic.com.fintechbankapp.BillRecyclerTouchListener;
+import finapp.publicstatic.com.fintechbankapp.BillScheduleActivity;
 import finapp.publicstatic.com.fintechbankapp.JSONParser;
 import finapp.publicstatic.com.fintechbankapp.R;
 import finapp.publicstatic.com.fintechbankapp.WebServiceAddress;
@@ -84,7 +84,21 @@ public class BillsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bill, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        //searchBills = (SearchView) view.findViewById(R.id.search_bills);
+        recyclerView.addOnItemTouchListener(new BillRecyclerTouchListener
+                (getActivity().getApplicationContext(), recyclerView, new BillRecyclerTouchListener.ClickListener() {
+            public void onClick(View view, int position) {
+
+                TextView tvBillId = (TextView) view.findViewById(R.id.bill_id) ;
+                Intent intent = new Intent(view.getContext(), BillScheduleActivity.class);
+                intent.putExtra("userId", mUserId);
+                intent.putExtra("billId", tvBillId.getText().toString());
+                view.getContext().startActivity(intent);
+            }
+
+            public void onLongClick(View view, int position) {
+            }
+        }));
+
         spinnerDate = (Spinner) view.findViewById(R.id.spinner_bill_date);
 
         spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -110,45 +124,6 @@ public class BillsFragment extends Fragment {
         return view;
 
     }
-
-    /*
-            //For the list, search and date spinner
-    private void showView(List<BillScheduleAdapter.BillListItem> billItems) {
-        billScheduleAdapter=new BillScheduleAdapter( this.getActivity() billItems);
-        billScheduleAdapter.setMode()
-        billScheduleAdapter.setLayoutManager(new LinearLayoutManager.(this));
-        //"String" to include the class for reference. and to complete the referencing of the list in adapter.
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(
-                inflater.getContext(), android.R.layout.simple_list_item_1, _____);
-        listBills.setAdapter(listAdapter);
-        listBills.setTextFilterEnabled(true);
-        setupSearchView();
-    }
-    //starts new activity on click for the individual items.
-    public void onListItemClick(ListView listBills, View itemView, int position, long id) {
-        Intent intent=new Intent(BillsFragment.this, BillsPayment );
-        startActivity(intent);
-    }
-
-    //search Function
-    private void setupSearchView(SearchView mSearchView) {
-        mSearchView.setIconifiedByDefault(false);
-        mSearchView.setOnQueryTextListener(this);
-        mSearchView.setSubmitButtonEnabled(true);
-        mSearchView.setQueryHint("Search Here");
-    }
-    public boolean onQueryTextChange(ListView listBills, String newText) {
-        if (TextUtils.isEmpty(newText)) {
-            listBills.clearTextFilter();
-        } else {
-            listBills.setFilterText(newText.toString());
-        }
-        return true;
-    }
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-*/
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
@@ -203,8 +178,7 @@ public class BillsFragment extends Fragment {
     }
 
     private Date formatDate(String dateString) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd " +
-                "hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 
         Date date = null;
         try {

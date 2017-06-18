@@ -1,6 +1,5 @@
 package Adapter;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Bills;
-import Model.Bills;
-import finapp.publicstatic.com.fintechbankapp.BillScheduleActivity;
 import finapp.publicstatic.com.fintechbankapp.R;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
@@ -51,16 +48,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         viewHolder.tvPayeeName.setText(bill.getIssuerName());
         viewHolder.tvBillAmount.setText("$ " + String.format("%.2f", bill
                 .getBillAmount()));
-
-        viewHolder.tvBillAmount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), BillScheduleActivity.class);
-                intent.putExtra("userId", String.valueOf(bill.getUserId()));
-                intent.putExtra("billId", String.valueOf(bill.getBillId()));
-                view.getContext().startActivity(intent);
-            }
-        });
     }
 
     @Override
