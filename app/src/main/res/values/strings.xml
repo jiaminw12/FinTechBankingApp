@@ -121,6 +121,7 @@
     <string name="billPayeeName"></string>
     <string name="billDate"></string>
     <string name="billDetails"></string>
+    <string name="btn_selectTime">SELECT TIME</string>
     <string-array name="choiceType">
         <item>Current Bills</item>
         <item>Bills Schedule</item>

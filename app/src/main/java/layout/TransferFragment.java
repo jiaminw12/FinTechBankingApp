@@ -230,7 +230,7 @@ public class TransferFragment extends Fragment implements View.OnClickListener {
 
         JSONObject json = jsonParser.makeHttpRequest(
                 "POST", webServiceAddress.getBaseUrl
-                        ("getAllAccountsByUserid"), params);
+                        ("getAllSavingAccountsByUserId"), params);
 
         if (json != null) {
             try {

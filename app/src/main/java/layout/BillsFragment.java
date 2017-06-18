@@ -3,7 +3,6 @@ package layout;
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.SearchView;
-import android.text.TextUtils;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,7 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import Adapter.BillAdapter;
+import Adapter.BillScheduleAdapter;
 import Model.Bills;
+import Model.Schedule;
 import finapp.publicstatic.com.fintechbankapp.BillRecyclerTouchListener;
 import finapp.publicstatic.com.fintechbankapp.BillScheduleActivity;
 import finapp.publicstatic.com.fintechbankapp.JSONParser;
@@ -42,11 +41,11 @@ public class BillsFragment extends Fragment {
     private static final String ARG_PARAM = "param";
     private static String mUserId;
 
-    private SearchView searchBills;
-    private Spinner spinnerDate;
+    private Spinner spinnerBillType;
     private RecyclerView recyclerView;
 
     List<Bills> billsList = new ArrayList<>();
+    List<Schedule> schedulesList = new ArrayList<>();
 
     private OnFragmentInteractionListener mListener;
 
@@ -79,29 +78,29 @@ public class BillsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_bill, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        spinnerBillType = (Spinner) view.findViewById(R.id.spinner_bill_type);
+
         recyclerView.addOnItemTouchListener(new BillRecyclerTouchListener
                 (getActivity().getApplicationContext(), recyclerView, new BillRecyclerTouchListener.ClickListener() {
             public void onClick(View view, int position) {
 
-                TextView tvBillId = (TextView) view.findViewById(R.id.bill_id) ;
-                Intent intent = new Intent(view.getContext(), BillScheduleActivity.class);
-                intent.putExtra("userId", mUserId);
-                intent.putExtra("billId", tvBillId.getText().toString());
-                view.getContext().startActivity(intent);
+                if(spinnerBillType.getSelectedItemPosition() == 0){
+                    TextView tvBillId = (TextView) view.findViewById(R.id.bill_id) ;
+                    Intent intent = new Intent(view.getContext(), BillScheduleActivity.class);
+                    intent.putExtra("userId", mUserId);
+                    intent.putExtra("billId", tvBillId.getText().toString());
+                    startActivityForResult(intent, 10001);
+                }
             }
 
             public void onLongClick(View view, int position) {
             }
         }));
 
-        spinnerDate = (Spinner) view.findViewById(R.id.spinner_bill_date);
-
-        spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerBillType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View view, int position, long id) {
                 // get the position
@@ -111,8 +110,8 @@ public class BillsFragment extends Fragment {
                 if (position == 0) {
                     BillTask();
                 } else if (position == 1) {
+                    BillScheduleTask();
                 }
-
             }
 
             @Override
@@ -125,11 +124,20 @@ public class BillsFragment extends Fragment {
 
     }
 
+    public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        if ((reqCode == 10001) && (resultCode == BillScheduleActivity.RESULT_OK)){
+            billsList = new ArrayList<>();
+            BillTask();
+        }
+    }
+
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
 
     private void BillTask() {
+        billsList = new ArrayList<>();
+        schedulesList = new ArrayList<>();
         JSONParser jsonParser = new JSONParser();
         WebServiceAddress webServiceAddress = new WebServiceAddress();
         final String TAG_SUCCESS = "success";
@@ -170,6 +178,52 @@ public class BillsFragment extends Fragment {
                 BillAdapter billAdapter = new BillAdapter(billsList);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
                 recyclerView.setAdapter(billAdapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void BillScheduleTask() {
+        billsList = new ArrayList<>();
+        schedulesList = new ArrayList<>();
+        JSONParser jsonParser = new JSONParser();
+        WebServiceAddress webServiceAddress = new WebServiceAddress();
+        final String TAG_SUCCESS = "success";
+        int success = 1;
+
+        HashMap<String, String> params = new HashMap<>();
+        params.put("userId", mUserId);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        JSONObject json = jsonParser.makeHttpRequest(
+                "POST", webServiceAddress.getBaseUrl
+                        ("getAllBillScheduleByUserId"), params);
+        if (json != null) {
+            try {
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+
+                    JSONArray jsonArray = json.getJSONArray("schedule");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject obj = jsonArray.getJSONObject(i);
+                        Schedule schedule = new Schedule();
+                        schedule.setScheduleId(obj.getInt("scheduleId"));
+                        schedule.setAmount(obj.getDouble("billAmount"));
+                        schedule.setDate(formatDate(obj.getString("date")));
+                        schedule.setIssuerName(obj.getString("issuerName"));
+
+                        //Add your values in your `ArrayList` as below:
+                        schedulesList.add(schedule);
+                    }
+                }
+                BillScheduleAdapter billScheduleAdapter = new BillScheduleAdapter(schedulesList);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+                recyclerView.setAdapter(billScheduleAdapter);
 
             } catch (JSONException e) {
                 e.printStackTrace();

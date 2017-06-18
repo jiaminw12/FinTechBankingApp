@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,79 +8,75 @@
     android:layout_height="match_parent"
     tools:context="finapp.publicstatic.com.fintechbankapp.BillScheduleActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_dueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="35dp"
+        android:textSize="25sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
 
+    <TextView
+        android:id="@+id/tv_payee_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_dueDate"
+        android:layout_alignParentStart="true"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/billPayeeName"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:text="" />
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spinner_account"
+        android:layout_below="@+id/tv_payee_name"
+        android:layout_alignStart="@+id/tv_payee_name"
+        android:layout_marginTop="15dp"
+        android:textSize="28sp"
+        android:text="$ "/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/dateOfBill"
-                android:layout_toRightOf="@id/billPayeeName"
-                android:text=""/>
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/tv_payee_name"
+        android:layout_toEndOf="@+id/textView8"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/billDetails"
-                android:layout_toEndOf="@id/billPayeeName"
-                android:text=""/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/billAmount"
-                android:layout_toEndOf="@id/billDetails"
-                android:text="" />
-
-            <Button
-                android:id="@+id/payButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="50dp"
-                android:text="@string/payButton" />
-            
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/billCheckBox"
-                android:text="@string/schedule_for_payment"
-                android:layout_above="@id/payButton"
-                android:onClick="onClick"/>
-            
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/dateTimeDisplay"
-                android:layout_above="@id/billCheckBox"/>
-
-
-
-    </RelativeLayout>
-    </FrameLayout>
-
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <Spinner
+        android:id="@+id/spinner_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation"/>
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/tv_dueDate"
+        android:layout_alignStart="@+id/textView8"/>
+
+    <CheckBox
+        android:id="@+id/checkBox_scheduler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="@string/schedule_for_payment"
+        android:layout_below="@+id/spinner_account"
+        android:layout_alignStart="@+id/spinner_account"/>
+
+    <Button
+        android:id="@+id/button_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/checkBox_scheduler"
+        android:layout_marginTop="29dp"
+        android:text="@string/payButton"
+        android:textColor="@color/white"
+        android:layout_alignStart="@+id/checkBox_scheduler"
+        android:layout_alignEnd="@+id/tv_dueDate"/>
 
 
 </RelativeLayout>

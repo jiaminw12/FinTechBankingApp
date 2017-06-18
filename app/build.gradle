@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -40,6 +41,7 @@ dependencies {
     compile 'it.michelelacorte.swipeablecard:library:2.3.0'
 
     compile 'com.github.grennis:ExpandableRecyclerView:0.9.3'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
     //compile 'com.android.support:appcompat-v7:25.3.1'
     //compile 'com.github.sharish:CreditCardView:v1.0.4'
