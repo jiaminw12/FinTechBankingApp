@@ -43,6 +43,10 @@ dependencies {
     compile 'com.github.grennis:ExpandableRecyclerView:0.9.3'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
+    compile 'com.tarun0.zxing-standalone:zxing-standalone:1.0.0'
+    compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
+
+    compile 'com.vinaygaba:creditcardview:1.0.3'
     //compile 'com.android.support:appcompat-v7:25.3.1'
     //compile 'com.github.sharish:CreditCardView:v1.0.4'
 

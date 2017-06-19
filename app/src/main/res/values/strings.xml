@@ -105,6 +105,10 @@
     <!-- Strings related to Wallet-->
     <string name="string_add_card">Add a card</string>
     <string name="string_scan">SCAN</string>
+    <string name="string_dialog_title">Enter the OTP below</string>
+    <string name="input_hint">OTP</string>
+    <string name="input_positiveText">OK</string>
+    <string name="input_negativeText">Cancel</string>
 
 
     <!-- Strings related to Planner-->
