@@ -428,5 +428,5 @@ public class WalletFragment extends Fragment {
             }
         }*/
     }
-    
+
 }

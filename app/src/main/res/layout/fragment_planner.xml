@@ -1,15 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="layout.BankFragment">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20sp"
+                tools:context="layout.BankFragment">
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="25dp"
+        android:text="@string/string_header_planner"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:text="@string/string_header_planner"/>
+        android:textStyle="bold"/>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
