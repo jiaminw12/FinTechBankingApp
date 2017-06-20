@@ -50,7 +50,7 @@ public class BillScheduleAdapter extends RecyclerView.Adapter<BillScheduleAdapte
         Schedule schedule = scheduleList.get(position);
         viewHolder.tvPayeeName.setText(schedule.getIssuerName());
 
-        Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Format formatter = new SimpleDateFormat("yyyy-mm-dd");
         String schDate = formatter.format(schedule.getDate());
 
         viewHolder.tvScheduleDate.setText(schDate);

@@ -37,7 +37,6 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
         public TextView cardNum;
         public TextView cardExpiryDate;
         public TextView activate;
-        public Button btnScan;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -47,7 +46,6 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.ViewHolder> 
             cardNum = (TextView)itemView.findViewById(R.id.title_card_num);
             cardExpiryDate = (TextView)itemView.findViewById(R.id.title_expiryDate);
             activate = (TextView)itemView.findViewById(R.id.title_activated);
-            btnScan = (Button)itemView.findViewById(R.id.button_scan);
         }
     }
 
