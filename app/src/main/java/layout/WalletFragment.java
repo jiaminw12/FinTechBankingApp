@@ -325,7 +325,7 @@ public class WalletFragment extends Fragment {
 
     private void addCard(String cardHolderName, String  cardNumber, String
             expiry, String  ccv){
-        JSONParser jsonParser = new JSONParser();
+        /*JSONParser jsonParser = new JSONParser();
         WebServiceAddress webServiceAddress = new WebServiceAddress();
         String TAG_SUCCESS = "success";
         int success = 0;
@@ -366,11 +366,11 @@ public class WalletFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     private void transferSubmit(){
-        String mAmt = amtEditText.getText().toString();
+        /*String mAmt = amtEditText.getText().toString();
         String mComment = commentEdittext.getText().toString();
         int postionCategory = spinnerCategory.getSelectedItemPosition() + 1;
 
@@ -426,8 +426,7 @@ public class WalletFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
-
-
+    
 }
